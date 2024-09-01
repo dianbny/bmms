@@ -28,12 +28,14 @@
                     <th colspan="6" style="text-align:center;">PEKERJA</th>
                     <th colspan="6" style="text-align:center;">TKJP/MK</th>
                         <tr>
+                            <th style="text-align:center;">On Duty</th>
                             <th style="text-align:center;">DCU</th>
                             <th style="text-align:center;">Fit</th>
                             <th style="text-align:center;">Unfit</th>
                             <th style="text-align:center;">Persentase</th>
                             <th style="text-align:center;">Status</th>
-                                        
+                                
+                            <th style="text-align:center;">On Duty</th>
                             <th style="text-align:center;">DCU</th>
                             <th style="text-align:center;">Fit</th>
                             <th style="text-align:center;">Unfit</th>
@@ -54,6 +56,7 @@
                         ?>
                             <tr>
                                 <td style="text-align:center;"><?= strftime('%d %B %Y', strtotime($thn."-".$bln."-".$i)); ?></td>
+                                <td style="text-align:center;"><?= $totalMasuk['_total_masuk_pekerja']; ?></td>
                                 <td style="text-align:center;"><?= $dcuPekerjaDay; ?></td>
                                 <td style="text-align:center;"><?= $getData->cekKeteranganDCUFungsi($fungsi, date($thn."-".$bln."-".$i), "FIT", "PEKERJA"); ?></td>
                                 <td style="text-align:center;"><?= $getData->cekKeteranganDCUFungsi($fungsi, date($thn."-".$bln."-".$i), "UNFIT", "PEKERJA"); ?></td>
@@ -72,6 +75,7 @@
                                     ?>
                                 </td>
 
+                                <td style="text-align:center;"><?= $totalMasuk['_total_masuk_tkjp']; ?></td>
                                 <td style="text-align:center;"><?= $dcuTKJPDay; ?></td>
                                 <td style="text-align:center;"><?= $getData->cekKeteranganDCUFungsi($fungsi, date($thn."-".$bln."-".$i), "FIT", "TKJP/MK"); ?></td>
                                 <td style="text-align:center;"><?= $getData->cekKeteranganDCUFungsi($fungsi, date($thn."-".$bln."-".$i), "UNFIT", "TKJP/MK"); ?></td>
