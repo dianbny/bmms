@@ -1,0 +1,166 @@
+@font-face {
+    font-family: 'Century Gothic';
+    src: url('../fonts/Century Gothic.ttf') format('truetype');
+}
+*{
+    margin: 0;
+    box-sizing: border-box;
+    font-family:'Century Gothic';
+}
+body{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: url("../images/background.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    
+}
+.container{
+    background-color:white;
+    width:370px;
+    height: 420px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
+    position: relative;
+}
+.container .top{
+    background-color: white;
+    width: 210px;
+    height: 30px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 30px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+}
+.container .top .icon{
+    width: 30%;
+    min-height: 100%;
+    display: flex;
+    align-items:center;
+    justify-content: end
+}
+.container .top .icon img{
+    width: 40px;
+    height: 25px;
+    
+}
+.container .top .title{
+    width: 65%;
+    font-size: 15px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    padding-left: 4px;
+    padding-top:5px;
+}
+.container .icon-form{
+    width: 100%;
+    height: auto;
+    padding: 5px;
+    margin-top: 55px;
+    text-align: center;
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: dimgray;
+}
+.container .icon-form img{
+    width: 65px;
+    height: 65px;
+    border-radius: 100px;
+}
+.container form{
+    width: 90%;
+    height: auto;
+    padding: 10px;
+    margin: 0 auto;
+}
+.label {
+    font-size: 14px;
+    padding-bottom: 5px;
+}
+.input-text {
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid dimgray;
+    background-color:transparent;
+    margin-bottom: 30px;
+    outline: none;
+}
+.input-text:hover{
+    border: 2px solid dimgray;
+}
+.submit-button {
+    width: 100%;
+    height: 40px;
+    padding: 8px;
+    border-radius: 8px;
+    background-color: dimgray;
+    font-size: 16px;
+    color: white;
+    border: 0px;
+    outline: none;
+}
+.submit-button:hover{
+    cursor: pointer;
+    font-weight: bold;
+}
+.withIcon{
+    position: relative;
+ }
+ .withIcon .input-text {
+    padding-left: 32px;
+}
+.withIcon i{
+    position: absolute;
+    top:12px;
+    left: 10px;
+    color: dimgray;
+}
+.container-footer{
+    width: 100%;
+    height: 50px;
+    position: absolute;
+    bottom: 0;
+}
+.container-footer div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.container-footer div .listImg{
+    width: 50%;
+    height: 100%;
+}
+.footer{
+    position: fixed;
+    bottom: 0;
+    background-color: black;
+    width: 100%;
+    min-height:30px;
+    padding: 6px;
+    color: white;
+    font-size: 13px;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+@media screen and (max-width:480px) {
+    .submit-button {
+        width: 100%;
+    }
+
+    .input-text {
+        width: 100%;
+    }
+    .container {
+        width: 90%;
+    }
+    
+}
