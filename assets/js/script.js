@@ -65,6 +65,17 @@ $(document).ready(function(){
         
     });
 
+    //Seventh Sub Menu Show
+    $("#seventh").click(function(){
+        if($(".menu-seventh").css("display") == "none"){
+            $(".menu-seventh").css("display","block");
+        }
+        else {
+            $(".menu-seventh").css("display","none");
+        }
+        
+    });
+
     //Konfirmasi Delete Pekerja/TKJP/MK
     $('.konfirmDelete').click(function(){
         var id = $(this).attr("data-id");
