@@ -33,6 +33,8 @@
 </head>
 <body>
     <?php
+
+        //Simpan Data Pekerja
         if($_GET['action'] == "simpan-pekerja"){
             $pageSuccess = ($_SESSION['page'] == "tambah-data-pekerja") ? "daftar-pegawai" : "daftar-tkjp-mk";
             $pageErr = ($_SESSION['page'] == "tambah-data-pekerja") ? $_SESSION['page'] : "tambah-data-tkjp-mk";
@@ -260,6 +262,8 @@
           <?php }
             }
         }
+
+        //Update Data Pekerja
         elseif($_GET['action'] == "simpan-update-pekerja"){  
             $id = $_GET['id'];
             $pageSuccess = ($_SESSION['page'] == "edit-data-pekerja") ? "daftar-pegawai" : "daftar-tkjp-mk";
@@ -452,6 +456,8 @@
           <?php }
             }
         }
+
+        //Simpan Data DCU
         elseif($_GET['action'] == "simpan-checkup"){
             if(isset($_POST['save'])){
                 $id = $_GET['id'];
@@ -503,12 +509,188 @@
                             }); }, 500);
                     </script>
           <?php }
-                elseif(!preg_match("/^[a-zA-Z .'\/]*$/", $_POST['complaint'])){ ?>
+                elseif(!preg_match("/^[0-9.]*$/", $_POST['suhutubuh'])){ ?>
+                    <script>
+                        setTimeout(function() { 
+                            swal({
+                                title: "Terjadi Kesalahan !",
+                                text: "Suhu Tubuh hanya boleh mengandung angka !",
+                                type: "error",
+                                confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "input-data-checkup-<?= $id; ?>";
+                                        }
+                            }); }, 500);
+                    </script>
+          <?php }
+                elseif(!preg_match("/^[a-zA-Z ,]*$/", $_POST['frekuensinafas'])){ ?>
+                    <script>
+                        setTimeout(function() { 
+                            swal({
+                                title: "Terjadi Kesalahan !",
+                                text: "Frekuensi pernafasan tidak boleh mengandung angka/karakter khusus !",
+                                type: "error",
+                                confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "input-data-checkup-<?= $id; ?>";
+                                        }
+                            }); }, 500);
+                    </script>
+          <?php }
+                elseif(!preg_match("/^[a-zA-Z ]*$/", $_POST['riwayat'])){ ?>
+                    <script>
+                        setTimeout(function() { 
+                            swal({
+                                title: "Terjadi Kesalahan !",
+                                text: "Pilihan riwayat penyakit tidak boleh mengandung angka/karakter khusus !",
+                                type: "error",
+                                confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "input-data-checkup-<?= $id; ?>";
+                                        }
+                            }); }, 500);
+                    </script>
+          <?php }
+                elseif(!preg_match("/^[a-zA-Z ,-]*$/", $_POST['detailriwayat'])){ ?>
+                    <script>
+                        setTimeout(function() { 
+                            swal({
+                                title: "Terjadi Kesalahan !",
+                                text: "Riwayat penyakit tidak boleh mengandung angka/karakter khusus !",
+                                type: "error",
+                                confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "input-data-checkup-<?= $id; ?>";
+                                        }
+                            }); }, 500);
+                    </script>
+          <?php }
+                elseif(!preg_match("/^[a-zA-Z ]*$/", $_POST['konsumsiobat'])){ ?>
+                    <script>
+                        setTimeout(function() { 
+                            swal({
+                                title: "Terjadi Kesalahan !",
+                                text: "Pilihan konsumsi obat tidak boleh mengandung angka/karakter khusus !",
+                                type: "error",
+                                confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "input-data-checkup-<?= $id; ?>";
+                                        }
+                            }); }, 500);
+                    </script>
+          <?php }
+                elseif(!preg_match("/^[a-zA-Z ,-]*$/", $_POST['tujuanobat'])){ ?>
+                    <script>
+                        setTimeout(function() { 
+                            swal({
+                                title: "Terjadi Kesalahan !",
+                                text: "Tujuan mengkonsumsi obat tidak boleh mengandung angka/karakter khusus !",
+                                type: "error",
+                                confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "input-data-checkup-<?= $id; ?>";
+                                        }
+                            }); }, 500);
+                    </script>
+          <?php }
+                elseif(!preg_match("/^[a-zA-Z ]*$/", $_POST['keluhan'])){ ?>
+                    <script>
+                        setTimeout(function() { 
+                            swal({
+                                title: "Terjadi Kesalahan !",
+                                text: "Pilihan keluhan tidak boleh mengandung angka/karakter khusus !",
+                                type: "error",
+                                confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "input-data-checkup-<?= $id; ?>";
+                                        }
+                            }); }, 500);
+                    </script>
+          <?php }
+                elseif(!preg_match("/^[a-zA-Z ,-]*$/", $_POST['detailkeluhan'])){ ?>
                     <script>
                         setTimeout(function() { 
                             swal({
                                 title: "Terjadi Kesalahan !",
                                 text: "Keluhan tidak boleh mengandung angka/karakter khusus !",
+                                type: "error",
+                                confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "input-data-checkup-<?= $id; ?>";
+                                        }
+                            }); }, 500);
+                    </script>
+          <?php }
+                elseif(!preg_match("/^[a-zA-Z ]*$/", $_POST['tingkatkesadaran'])){ ?>
+                    <script>
+                        setTimeout(function() { 
+                            swal({
+                                title: "Terjadi Kesalahan !",
+                                text: "Pilihan tingkat kesadaran tidak boleh mengandung angka/karakter khusus !",
+                                type: "error",
+                                confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "input-data-checkup-<?= $id; ?>";
+                                        }
+                            }); }, 500);
+                    </script>
+          <?php }
+                elseif(!preg_match("/^[a-zA-Z ]*$/", $_POST['cekmata'])){ ?>
+                    <script>
+                        setTimeout(function() { 
+                            swal({
+                                title: "Terjadi Kesalahan !",
+                                text: "Pilihan pemeriksaan mata tidak boleh mengandung angka/karakter khusus !",
+                                type: "error",
+                                confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "input-data-checkup-<?= $id; ?>";
+                                        }
+                            }); }, 500);
+                    </script>
+          <?php }
+                elseif(!preg_match("/^[a-zA-Z ]*$/", $_POST['romberg'])){ ?>
+                    <script>
+                        setTimeout(function() { 
+                            swal({
+                                title: "Terjadi Kesalahan !",
+                                text: "Pilihan pemeriksaan keseimbangan tidak boleh mengandung angka/karakter khusus !",
+                                type: "error",
+                                confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "input-data-checkup-<?= $id; ?>";
+                                        }
+                            }); }, 500);
+                    </script>
+          <?php }
+                elseif(!preg_match("/^[a-zA-Z ]*$/", $_POST['drugs'])){ ?>
+                    <script>
+                        setTimeout(function() { 
+                            swal({
+                                title: "Terjadi Kesalahan !",
+                                text: "Pilihan gejala pengaruh alkohol tidak boleh mengandung angka/karakter khusus !",
                                 type: "error",
                                 confirmButtonText: "OK"
                                 },
@@ -526,17 +708,81 @@
                         $sistol = $_POST['sistolik'];
                         $diastol = $_POST['diastolik'];
                         $denyut = $_POST['denyutnadi'];
-                        $keluhan = $_POST['complaint'];
+                        $suhu = $_POST['suhutubuh'];
+                        $nafas = $_POST['frekuensinafas'];
+                        $riwayat = $_POST['riwayatpenyakit'];
+                        $detailriwayat = ($_POST['detailriwayat'] == "") ? "-" : $_POST['detailriwayat'];
+                        $konsumsiobat = $_POST['konsumsiobat'];
+                        $tujuanobat = ($_POST['tujuanobat'] == "") ? "-" : $_POST['tujuanobat'];
+                        $keluhan = $_POST['keluhan'];
+                        $detailkeluhan = ($_POST['detailkeluhan'] == "") ? "-" : $_POST['detailkeluhan'];
+                        $kesadaran = $_POST['tingkatkesadaran'];
+                        $mata = $_POST['cekmata'];
+                        $romberg = $_POST['romberg'];
+                        $napza = $_POST['drugs'];
                         $ket;
 
-                        if($sistol > 139 || $diastol > 99){
-                            $ket = "UNFIT";
+                        if($riwayat == "Ada" || $konsumsiobat == "Ada" || $keluhan == "Ada"){
+
+                            if($sistol > 139){
+                                $ket = "UNFIT";
+                            }
+                            elseif($diastol > 99){
+                                $ket = "UNFIT";
+                            }
+                            elseif($suhu > 37.5){
+                                $ket = "UNFIT";
+                            }
+                            elseif($nafas == "Tidak Teratur, Terlihat Tanda Sesak"){
+                                $ket = "UNFIT";
+                            }
+                            elseif($kesadaran == "Buruk"){
+                                $ket = "UNFIT";
+                            }
+                            elseif($mata == "Tidak Normal"){
+                                $ket = "UNFIT";
+                            }
+                            elseif($romberg == "Buruk"){
+                                $ket = "UNFIT";
+                            }
+                            elseif($napza == "Positif"){
+                                $ket = "UNFIT";
+                            }
+                            else {
+                                $ket = "FIT";
+                            }
                         }
                         else {
-                            $ket = "FIT";
+                            if($sistol > 139){
+                                $ket = "UNFIT";
+                            }
+                            elseif($diastol > 99){
+                                $ket = "UNFIT";
+                            }
+                            elseif($suhu > 37.5){
+                                $ket = "UNFIT";
+                            }
+                            elseif($nafas == "Tidak Teratur, Terlihat Tanda Sesak"){
+                                $ket = "UNFIT";
+                            }
+                            elseif($kesadaran == "Buruk"){
+                                $ket = "UNFIT";
+                            }
+                            elseif($mata == "Tidak Normal"){
+                                $ket = "UNFIT";
+                            }
+                            elseif($romberg == "Buruk"){
+                                $ket = "UNFIT";
+                            }
+                            elseif($napza == "Positif"){
+                                $ket = "UNFIT";
+                            }
+                            else {
+                                $ket = "FIT";
+                            }
                         }
 
-                        $saveData->simpanCheckup($id, $tgl, $waktu, $sistol, $diastol, $denyut, ucwords($keluhan), $ket, $dataUserLogin['_id_user']); ?>
+                        $saveData->simpanCheckup($id, $tgl, $waktu, $sistol, $diastol, $denyut, $suhu, $nafas, $riwayat, ucwords($detailriwayat), $konsumsiobat, ucwords($tujuanobat), $keluhan, ucwords($detailkeluhan), $kesadaran, $mata, $romberg, $napza, $ket, $dataUserLogin['_id_user']); ?>
                             <script>
                                 setTimeout(function() { 
                                     swal({
@@ -568,6 +814,8 @@
           <?php }
             }
         }
+
+        //Update Data DCU
         elseif($_GET['action'] == "simpan-update-checkup"){
             if(isset($_POST['save'])){
                 $id = $_GET['id'];
@@ -619,12 +867,188 @@
                             }); }, 500);
                     </script>
           <?php }
-                elseif(!preg_match("/^[a-zA-Z .'-\/]*$/", $_POST['complaint'])){ ?>
+                elseif(!preg_match("/^[0-9.]*$/", $_POST['suhutubuh'])){ ?>
+                    <script>
+                        setTimeout(function() { 
+                            swal({
+                                title: "Terjadi Kesalahan !",
+                                text: "Suhu Tubuh hanya boleh mengandung angka !",
+                                type: "error",
+                                confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "edit-data-checkup-<?= $id; ?>";
+                                        }
+                            }); }, 500);
+                    </script>
+          <?php }
+                elseif(!preg_match("/^[a-zA-Z ,]*$/", $_POST['frekuensinafas'])){ ?>
+                    <script>
+                        setTimeout(function() { 
+                            swal({
+                                title: "Terjadi Kesalahan !",
+                                text: "Frekuensi pernafasan tidak boleh mengandung angka/karakter khusus !",
+                                type: "error",
+                                confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "edit-data-checkup-<?= $id; ?>";
+                                        }
+                            }); }, 500);
+                    </script>
+          <?php }
+                elseif(!preg_match("/^[a-zA-Z ]*$/", $_POST['riwayat'])){ ?>
+                    <script>
+                        setTimeout(function() { 
+                            swal({
+                                title: "Terjadi Kesalahan !",
+                                text: "Pilihan riwayat penyakit tidak boleh mengandung angka/karakter khusus !",
+                                type: "error",
+                                confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "edit-data-checkup-<?= $id; ?>";
+                                        }
+                            }); }, 500);
+                    </script>
+          <?php }
+                elseif(!preg_match("/^[a-zA-Z ,-]*$/", $_POST['detailriwayat'])){ ?>
+                    <script>
+                        setTimeout(function() { 
+                            swal({
+                                title: "Terjadi Kesalahan !",
+                                text: "Riwayat penyakit tidak boleh mengandung angka/karakter khusus !",
+                                type: "error",
+                                confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "edit-data-checkup-<?= $id; ?>";
+                                        }
+                            }); }, 500);
+                    </script>
+          <?php }
+                elseif(!preg_match("/^[a-zA-Z ]*$/", $_POST['konsumsiobat'])){ ?>
+                    <script>
+                        setTimeout(function() { 
+                            swal({
+                                title: "Terjadi Kesalahan !",
+                                text: "Pilihan konsumsi obat tidak boleh mengandung angka/karakter khusus !",
+                                type: "error",
+                                confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "edit-data-checkup-<?= $id; ?>";
+                                        }
+                            }); }, 500);
+                    </script>
+          <?php }
+                elseif(!preg_match("/^[a-zA-Z ,-]*$/", $_POST['tujuanobat'])){ ?>
+                    <script>
+                        setTimeout(function() { 
+                            swal({
+                                title: "Terjadi Kesalahan !",
+                                text: "Tujuan mengkonsumsi obat tidak boleh mengandung angka/karakter khusus !",
+                                type: "error",
+                                confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "edit-data-checkup-<?= $id; ?>";
+                                        }
+                            }); }, 500);
+                    </script>
+          <?php }
+                elseif(!preg_match("/^[a-zA-Z ]*$/", $_POST['keluhan'])){ ?>
+                    <script>
+                        setTimeout(function() { 
+                            swal({
+                                title: "Terjadi Kesalahan !",
+                                text: "Pilihan keluhan tidak boleh mengandung angka/karakter khusus !",
+                                type: "error",
+                                confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "edit-data-checkup-<?= $id; ?>";
+                                        }
+                            }); }, 500);
+                    </script>
+          <?php }
+                elseif(!preg_match("/^[a-zA-Z ,-]*$/", $_POST['detailkeluhan'])){ ?>
                     <script>
                         setTimeout(function() { 
                             swal({
                                 title: "Terjadi Kesalahan !",
                                 text: "Keluhan tidak boleh mengandung angka/karakter khusus !",
+                                type: "error",
+                                confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "edit-data-checkup-<?= $id; ?>";
+                                        }
+                            }); }, 500);
+                    </script>
+          <?php }
+                elseif(!preg_match("/^[a-zA-Z ]*$/", $_POST['tingkatkesadaran'])){ ?>
+                    <script>
+                        setTimeout(function() { 
+                            swal({
+                                title: "Terjadi Kesalahan !",
+                                text: "Pilihan tingkat kesadaran tidak boleh mengandung angka/karakter khusus !",
+                                type: "error",
+                                confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "edit-data-checkup-<?= $id; ?>";
+                                        }
+                            }); }, 500);
+                    </script>
+          <?php }
+                elseif(!preg_match("/^[a-zA-Z ]*$/", $_POST['cekmata'])){ ?>
+                    <script>
+                        setTimeout(function() { 
+                            swal({
+                                title: "Terjadi Kesalahan !",
+                                text: "Pilihan pemeriksaan mata tidak boleh mengandung angka/karakter khusus !",
+                                type: "error",
+                                confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "edit-data-checkup-<?= $id; ?>";
+                                        }
+                            }); }, 500);
+                    </script>
+          <?php }
+                elseif(!preg_match("/^[a-zA-Z ]*$/", $_POST['romberg'])){ ?>
+                    <script>
+                        setTimeout(function() { 
+                            swal({
+                                title: "Terjadi Kesalahan !",
+                                text: "Pilihan pemeriksaan keseimbangan tidak boleh mengandung angka/karakter khusus !",
+                                type: "error",
+                                confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "edit-data-checkup-<?= $id; ?>";
+                                        }
+                            }); }, 500);
+                    </script>
+          <?php }
+                elseif(!preg_match("/^[a-zA-Z ]*$/", $_POST['drugs'])){ ?>
+                    <script>
+                        setTimeout(function() { 
+                            swal({
+                                title: "Terjadi Kesalahan !",
+                                text: "Pilihan gejala pengaruh alkohol tidak boleh mengandung angka/karakter khusus !",
                                 type: "error",
                                 confirmButtonText: "OK"
                                 },
@@ -641,17 +1065,87 @@
                     $sistol = $_POST['sistolik'];
                     $diastol = $_POST['diastolik'];
                     $denyut = $_POST['denyutnadi'];
-                    $keluhan = $_POST['complaint'];
+                    $suhu = $_POST['suhutubuh'];
+                    $nafas = $_POST['frekuensinafas'];
+                    $riwayat = $_POST['riwayatpenyakit'];
+                    $detailriwayat = ($_POST['detailriwayat'] == "") ? "-" : $_POST['detailriwayat'];
+                    $konsumsiobat = $_POST['konsumsiobat'];
+                    $tujuanobat = ($_POST['tujuanobat'] == "") ? "-" : $_POST['tujuanobat'];
+                    $keluhan = $_POST['keluhan'];
+                    $detailkeluhan = ($_POST['detailkeluhan'] == "") ? "-" : $_POST['detailkeluhan'];
+                    $kesadaran = $_POST['tingkatkesadaran'];
+                    $mata = $_POST['cekmata'];
+                    $romberg = $_POST['romberg'];
+                    $napza = $_POST['drugs'];
                     $ket;
 
-                    if($sistol > 139 || $diastol > 99){
-                        $ket = "UNFIT";
+                    if($riwayat == "Ada" || $konsumsiobat == "Ada" || $keluhan == "Ada"){
+
+                        if($sistol > 139){
+                            $ket = "UNFIT";
+                        }
+                        elseif($diastol > 99){
+                            $ket = "UNFIT";
+                        }
+                        elseif($denyut > 100){
+                            $ket = "UNFIT";
+                        }
+                        elseif($suhu > 37.5){
+                            $ket = "UNFIT";
+                        }
+                        elseif($nafas == "Tidak Teratur, Terlihat Tanda Sesak"){
+                            $ket = "UNFIT";
+                        }
+                        elseif($kesadaran == "Buruk"){
+                            $ket = "UNFIT";
+                        }
+                        elseif($mata == "Tidak Normal"){
+                            $ket = "UNFIT";
+                        }
+                        elseif($romberg == "Buruk"){
+                            $ket = "UNFIT";
+                        }
+                        elseif($napza == "Positif"){
+                            $ket = "UNFIT";
+                        }
+                        else {
+                            $ket = "FIT";
+                        }
                     }
                     else {
-                        $ket = "FIT";
+                        if($sistol > 139){
+                            $ket = "UNFIT";
+                        }
+                        elseif($diastol > 99){
+                            $ket = "UNFIT";
+                        }
+                        elseif($denyut > 100){
+                            $ket = "UNFIT";
+                        }
+                        elseif($suhu > 37.5){
+                            $ket = "UNFIT";
+                        }
+                        elseif($nafas == "Tidak Teratur, Terlihat Tanda Sesak"){
+                            $ket = "UNFIT";
+                        }
+                        elseif($kesadaran == "Buruk"){
+                            $ket = "UNFIT";
+                        }
+                        elseif($mata == "Tidak Normal"){
+                            $ket = "UNFIT";
+                        }
+                        elseif($romberg == "Buruk"){
+                            $ket = "UNFIT";
+                        }
+                        elseif($napza == "Positif"){
+                            $ket = "UNFIT";
+                        }
+                        else {
+                            $ket = "FIT";
+                        }
                     }
 
-                    $saveData->updateCheckup($id, $tgl, $waktu, $sistol, $diastol, $denyut, ucwords($keluhan), $ket); ?>
+                    $saveData->updateCheckup($id, $tgl, $waktu, $sistol, $diastol, $denyut, $suhu, $nafas, $riwayat, ucwords($detailriwayat), $konsumsiobat, ucwords($tujuanobat), $keluhan, ucwords($detailkeluhan), $kesadaran, $mata, $romberg, $napza, $ket, $dataUserLogin['_id_user']); ?>
                         <script>
                             setTimeout(function() { 
                                 swal({
