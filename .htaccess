@@ -27,6 +27,7 @@ RewriteRule ^simpan-checkup-([0-9A-Z-]+)$ process/_save_data.php?action=simpan-c
 RewriteRule ^simpan-update-checkup-([0-9A-Z-]+)$ process/_save_data.php?action=simpan-update-checkup&id=$1 [L]
 RewriteRule ^hapus-data-checkup-([0-9A-Z-]+)$ process/_delete_data.php?action=hapus-data-checkup&id=$1 [L]
 RewriteRule ^rekap-data-checkup$ pages/_dashboard.php?page=rekap-data-checkup [L]
+RewriteRule ^rekap-data-checkup-harian$ pages/_dashboard.php?page=rekap-data-checkup-harian [L]
 RewriteRule ^persentase-dcu-harian$ pages/_dashboard.php?page=persentase-dcu-harian [L]
 RewriteRule ^persentase-dcu-bulanan$ pages/_dashboard.php?page=persentase-dcu-bulanan [L]
 RewriteRule ^pencarian-data-checkup$ pages/_dashboard.php?page=pencarian-data-checkup [L]
