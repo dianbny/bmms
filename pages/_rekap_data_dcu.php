@@ -106,19 +106,22 @@
                                 <?php
                                     for ($i = 1; $i <= $jumTgl; $i++){ ?>
 
-                                        <th colspan="5" style="text-align:center;"><?= $i; ?></th>
+                                        <th colspan="6" style="text-align:center;"><?= $i; ?></th>
                             <?php } ?>
+                            </tr>
+                            
                                 <tr>
                                 <?php
                                     for ($i = 1; $i <= $jumTgl; $i++){ ?>
                                         <th style="text-align:center;">Sis.</th>
                                         <th style="text-align:center;">Dia.</th>
                                         <th style="text-align:center;">DN</th>
-                                        <th>Keluhan</th>
+                                        <th style="text-align:center;">Suhu</th>
+                                        <th style="text-align:center;">Frek. Nafas</th>
                                         <th style="text-align:center;">Ket.</th>
                             <?php } ?>
                                 </tr>
-                            </tr>
+                            
                             <?php
                             $no = 1;
                             if(isset($_POST['function'])){
@@ -165,7 +168,16 @@
                                                         <?php
                                                             if($getData->cekDCUPekerja($row['_id_pekerja'], $i, (isset($_POST['month']) && !empty($_POST['month'])) ? $_POST['month'] : date('m'), (isset($_POST['year']) && !empty($_POST['year'])) ? $_POST['year'] : date('Y')) > 0){
                                                                 $dataDCU = $getData->getDataDCU($row['_id_pekerja'], $i, (isset($_POST['month']) && !empty($_POST['month'])) ? $_POST['month'] : date('m'), (isset($_POST['year']) && !empty($_POST['year'])) ? $_POST['year'] : date('Y'));
-                                                                echo $dataDCU['_keluhan'];
+                                                                echo $dataDCU['_suhu_tubuh'];
+                                                            }
+                                                            
+                                                        ?> 
+                                                    </td>
+                                                    <td>
+                                                        <?php
+                                                            if($getData->cekDCUPekerja($row['_id_pekerja'], $i, (isset($_POST['month']) && !empty($_POST['month'])) ? $_POST['month'] : date('m'), (isset($_POST['year']) && !empty($_POST['year'])) ? $_POST['year'] : date('Y')) > 0){
+                                                                $dataDCU = $getData->getDataDCU($row['_id_pekerja'], $i, (isset($_POST['month']) && !empty($_POST['month'])) ? $_POST['month'] : date('m'), (isset($_POST['year']) && !empty($_POST['year'])) ? $_POST['year'] : date('Y'));
+                                                                echo $dataDCU['_frekuensi_nafas'];
                                                             }
                                                             
                                                         ?> 
