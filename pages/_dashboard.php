@@ -53,13 +53,17 @@
         <span style="font-size:26px;cursor:pointer;color:black;" onclick="openNav()"><i class="fa fa-bars" aria-hidden="true"></i></span>&nbsp;&nbsp;
         <img src="assets/images/pertamina.png">
         <span class="span">PERTAMINA <span style="color:red;">EP</span></span>
+        <div class="divuser">
+            Hi, &nbsp; <strong><?= ucwords($dataUser['_nama_pekerja']); ?></strong> | Date : <?= date('d-m-Y'); ?>
+            <img src="assets/images/user.png">
+        </div>
     </div>
     <!-- Akhir Topbar -->
 
     <!-- Sidebar -->
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><i class="fa fa-times" aria-hidden="true"></i></a>
-        <img src="assets/images/pertamina.png">
+        
         <a href="dashboard"><i class="fa fa-tachometer" aria-hidden="true"></i>&nbsp; Dashboard</a>
         <a href="javascript:void(0)" id="first"><i class="fa fa-users" aria-hidden="true"></i>&nbsp; Pekerja</a>
             <div class="menu-first">
@@ -69,7 +73,6 @@
         <a href="javascript:void(0)" id="second"><i class="fa fa-stethoscope" aria-hidden="true"></i>&nbsp; Daily Checkup</a>
             <div class="menu-second">
                 <a href="data-checkup"><i class="fa fa-stethoscope" aria-hidden="true"></i>&nbsp; Data Checkup</a>
-                <a href="rekap-data-checkup"><i class="fa fa-stethoscope" aria-hidden="true"></i>&nbsp; Rekap Data</a>
                 <a href="pencarian-data-checkup"><i class="fa fa-search" aria-hidden="true"></i>&nbsp; Pencarian</a>
             </div>
         <a href="javascript:void(0)" id="third"><i class="fa fa-percent" aria-hidden="true"></i>&nbsp; Persentase Checkup</a>
@@ -82,18 +85,23 @@
                 <a href="data-mcu-pekerja"><i class="fa fa-heartbeat" aria-hidden="true"></i>&nbsp; Pegawai</a>
                 <a href="data-mcu-tkjp-mk"><i class="fa fa-heartbeat" aria-hidden="true"></i>&nbsp; TKJP / MK</a>
             </div>
-        <a href="javascript:void(0)" id="fifth"><i class="fa fa-id-card-o" aria-hidden="true"></i>&nbsp; Visitor</a>
+        <a href="javascript:void(0)" id="fifth"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp; Kotak P3K</a>
             <div class="menu-fifth">
-                <a href="daftar-visitor"><i class="fa fa-users" aria-hidden="true"></i>&nbsp; Visitor</a>
-                <a href="data-checkup-visitor"><i class="fa fa-stethoscope" aria-hidden="true"></i>&nbsp; Daily Checkup</a>
+                <a href="#"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp; List Kotak P3K</a>
+                <a href="#"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp; Inspeksi Kotak P3K</a>
             </div>
         <?php
             if($dataUserLogin['_level_user'] == "Admin"){ ?>
                 <a href="daftar-pengguna"><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp; Daftar Pengguna</a>
       <?php }
         ?>
-        <a href="javascript:void(0)" id="sixth"><i class="fa fa-cogs" aria-hidden="true"></i>&nbsp; Pengaturan</a>
+        <a href="javascript:void(0)" id="sixth"><i class="fa fa-file-excel-o" aria-hidden="true"></i>&nbsp; Export</a>
             <div class="menu-sixth">
+                <a href="#"><i class="fa fa-file-excel-o" aria-hidden="true"></i>&nbsp; Rekap Harian</a>
+                <a href="rekap-data-checkup"><i class="fa fa-file-excel-o" aria-hidden="true"></i>&nbsp; Rekap Bulanan</a>
+            </div>
+        <a href="javascript:void(0)" id="seventh"><i class="fa fa-cogs" aria-hidden="true"></i>&nbsp; Pengaturan</a>
+            <div class="menu-seventh">
                 <a href="daftar-perusahaan"><i class="fa fa-university" aria-hidden="true"></i>&nbsp; Perusahaan</a>
                 <a href="daftar-fungsi"><i class="fa fa-sitemap" aria-hidden="true"></i>&nbsp; Fungsi</a>
                 <a href="ubah-password"><i class="fa fa-key" aria-hidden="true"></i>&nbsp; Password</a>
@@ -161,12 +169,6 @@
 
                     include "_edit_data_dcu.php";
         
-                    break;
-
-                case "rekap-data-checkup":
-
-                    include "_rekap_data_dcu.php";
-            
                     break;
 
                 case "daftar-visitor":
@@ -330,6 +332,17 @@
                             
                     break;
 
+                case "rekap-data-checkup":
+
+                    include "_rekap_data_dcu.php";
+                
+                    break;
+
+                case "rekap-data-checkup-harian":
+
+                    include "_rekap_data_dcu_harian.php";
+                    
+                    break;
 
                 case "dashboard" : 
 
@@ -350,16 +363,6 @@
                     } ?>
 
         <label class="labelTitle"><i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;Dashboard</label>
-        <div class="user-login">
-            <div class="user">
-                <img src="assets/images/user.png" alt="User">
-            </div>
-            <div class="profil">
-                NAMA &nbsp;: <strong><?= strtoupper($dataUser['_nama_pekerja']); ?></strong><br>
-                FUNGSI : <strong><?= $fungsi['_nama_fungsi']; ?></strong><br>
-                <a href="logout" class="btn-danger">Log Out &nbsp;<i class="fa fa-sign-out" aria-hidden="true"></i></a>
-            </div>
-        </div>
 
         <!-- Dashboar Total -->
         <div class="panel">
@@ -514,6 +517,8 @@
                                     <th style="text-align:center;">Sis.</th>
                                     <th style="text-align:center;">Dias.</th>
                                     <th style="text-align:center;">DN.</th>
+                                    <th style="text-align:center;">Suhu</th>
+                                    <th style="text-align:center;">Frek. Nafas</th>
                                     <th style="text-align:center;">Keterangan (Fit/Unfit)</th>
                                     <th style="text-align:center;">Waktu Checkup</th>
                                     <th>Pemeriksa (Medic)</th>
@@ -527,6 +532,8 @@
                                             <td style="text-align:center;"><?= $row['_sistolik']; ?></td>
                                             <td style="text-align:center;"><?= $row['_diastolik']; ?></td>
                                             <td style="text-align:center;"><?= $row['_denyut_nadi']; ?></td>
+                                            <td style="text-align:center;"><?= $row['_suhu_tubuh']; ?></td>
+                                            <td style="text-align:center;"><?= $row['_frekuensi_nafas']; ?></td>
                                             <td>
                                                 <span class="span-ket" style="background-color:<?= ($row['_keterangan']) == "FIT" ? 'green' : 'red'; ?>">
                                                     <?= $row['_keterangan']; ?>
@@ -566,6 +573,8 @@
                                     <th style="text-align:center;">Sis.</th>
                                     <th style="text-align:center;">Dias.</th>
                                     <th style="text-align:center;">DN.</th>
+                                    <th style="text-align:center;">Suhu</th>
+                                    <th style="text-align:center;">Frek. Nafas</th>
                                     <th style="text-align:center;">Keterangan (Fit/Unfit)</th>
                                     <th style="text-align:center;">Waktu Checkup</th>
                                     <th>Pemeriksa (Medic)</th>
@@ -579,6 +588,8 @@
                                             <td style="text-align:center;"><?= $row['_sistolik']; ?></td>
                                             <td style="text-align:center;"><?= $row['_diastolik']; ?></td>
                                             <td style="text-align:center;"><?= $row['_denyut_nadi']; ?></td>
+                                            <td style="text-align:center;"><?= $row['_suhu_tubuh']; ?></td>
+                                            <td style="text-align:center;"><?= $row['_frekuensi_nafas']; ?></td>
                                             <td>
                                                 <span class="span-ket" style="background-color:<?= ($row['_keterangan']) == "FIT" ? 'green' : 'red'; ?>">
                                                     <?= $row['_keterangan']; ?>
