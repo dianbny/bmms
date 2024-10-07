@@ -19,6 +19,7 @@
                     <th rowspan="2">Nama Fungsi</th>
                     <th colspan="6" style="text-align:center;">PEKERJA</th>
                     <th colspan="6" style="text-align:center;">TKJP/MK</th>
+                </tr>
                         <tr>
                             <th style="text-align:center;">On Duty</th>
                             <th style="text-align:center;">DCU</th>
@@ -34,7 +35,7 @@
                             <th style="text-align:center;">Persentase</th>
                             <th style="text-align:center;">Status</th>
                         </tr>
-                </tr>
+                
                 <?php
                    $no = 1;
                    foreach($getData->listFungsi() as $row){ 

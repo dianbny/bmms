@@ -101,6 +101,8 @@
                                 <th rowspan="2" style="text-align:center;">Tanggal</th>
                                 <th colspan="6" style="text-align:center;">PEKERJA</th>
                                 <th colspan="6" style="text-align:center;">TKJP/MK</th>
+
+                            </tr>
                                     <tr>
                                         <th style="text-align:center;">On Duty</th>
                                         <th style="text-align:center;">DCU</th>
@@ -116,7 +118,7 @@
                                         <th style="text-align:center;">Persentase</th>
                                         <th style="text-align:center;">Status</th>
                                     </tr>
-                            </tr>
+                            
                             <?php
                             if(isset($_POST['function'])){
                                 if($getData->cekPekerjaAllbyFungsi($_POST['function']) > 0){
