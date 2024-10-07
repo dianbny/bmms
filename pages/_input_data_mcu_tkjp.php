@@ -9,9 +9,18 @@
 
     $_SESSION['page'] = $_GET['page'];
 
-    $id = $_GET['id'];
-    $dataPekerja = $getData->getDataPekerja($id);
-    $dataMCU = $getData->getDataMCU($id);
+    if(isset($_GET['id'])){
+        if($getData->cekNopek($_GET['id']) < 1){ ?>
+            <script>    
+                window.location.href = "dashboard";
+            </script>
+  <?php }
+        
+        $id = $_GET['id'];
+        $dataPekerja = $getData->getDataPekerja($id);
+        $dataMCU = $getData->getDataMCU($id);
+    }
+    
 ?>
 <div class="container-form">
     <h5><i class="fa fa-stethoscope" aria-hidden="true"></i> &nbsp; Form Medical Checkup</h5><br>
