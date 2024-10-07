@@ -33,7 +33,7 @@
                         <?php
                             for ($i = 1; $i <= $jumTgl; $i++){ ?>
 
-                                <th colspan="5" style="text-align:center;"><?= $i; ?></th>
+                                <th colspan="6" style="text-align:center;"><?= $i; ?></th>
                       <?php } ?>
                     <tr>
                         <?php
@@ -41,7 +41,8 @@
                                 <th style="text-align:center;">Sis.</th>
                                 <th style="text-align:center;">Dia.</th>
                                 <th style="text-align:center;">DN</th>
-                                <th>Keluhan</th>
+                                <th style="text-align:center;">Suhu</th>
+                                <th style="text-align:center;">Frek. Nafas</th>
                                 <th style="text-align:center;">Ket.</th>
                       <?php } ?>
                     </tr>
@@ -89,7 +90,16 @@
                                             <?php
                                                 if($getData->cekDCUPekerja($row['_id_pekerja'], $i, $bln, $thn) > 0){
                                                     $dataDCU = $getData->getDataDCU($row['_id_pekerja'], $i, $bln, $thn);
-                                                    echo $dataDCU['_keluhan'];
+                                                    echo $dataDCU['_suhu_tubuh'];
+                                                }
+                                                
+                                            ?> 
+                                        </td>
+                                        <td>
+                                            <?php
+                                                if($getData->cekDCUPekerja($row['_id_pekerja'], $i, $bln, $thn) > 0){
+                                                    $dataDCU = $getData->getDataDCU($row['_id_pekerja'], $i, $bln, $thn);
+                                                    echo $dataDCU['_frekuensi_nafas'];
                                                 }
                                                 
                                             ?> 
