@@ -95,6 +95,7 @@
                                     <th>No. Pekerja/TKJP/MK</th>
                                     <th>Nama Pekerja/TKJP/MK</th>
                                     <th>Fungsi</th>
+                                    <th>Status</th>
                                     <th>Perusahaan</th>
                                     <th style="text-align:center;">Detail</th>
                                 </tr>
@@ -106,6 +107,7 @@
                                             <td><?= $row['_id_pekerja']; ?></td>
                                             <td><?= $row['_nama_pekerja']; ?></td>
                                             <td><?= $row['_nama_fungsi']; ?></td>
+                                            <td><?= $row['_status']; ?></td>
                                             <td><?= $row['_perusahaan']; ?></td>
                                             <td style="text-align:center;"><a href="detail-data-checkup-pekerja-<?= $row['_id_pekerja']; ?>-<?= $_POST['month']; ?>-<?= $_POST['year']; ?>" class="linkDetail"><i class="fa fa-info-circle" aria-hidden="true"></i></a></td>
                                         </tr>
