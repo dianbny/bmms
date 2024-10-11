@@ -97,7 +97,7 @@
         ?>
         <a href="javascript:void(0)" id="sixth"><i class="fa fa-file-excel-o" aria-hidden="true"></i>&nbsp; Export</a>
             <div class="menu-sixth">
-                <a href="#"><i class="fa fa-file-excel-o" aria-hidden="true"></i>&nbsp; Rekap Harian</a>
+                <a href="rekap-data-checkup-harian"><i class="fa fa-file-excel-o" aria-hidden="true"></i>&nbsp; Rekap Harian</a>
                 <a href="rekap-data-checkup"><i class="fa fa-file-excel-o" aria-hidden="true"></i>&nbsp; Rekap Bulanan</a>
             </div>
         <a href="javascript:void(0)" id="seventh"><i class="fa fa-cogs" aria-hidden="true"></i>&nbsp; Pengaturan</a>
@@ -348,21 +348,33 @@
 
                     foreach($getData->listFungsi() as $row){
                         $namaFungsi[] = substr($row['_nama_fungsi'], 0, 4);
-            
+
                         $totalMasuk = $getData->getNamaFungsi($row['_id_fungsi']);
                         //$totalMasukBulan = $totalMasuk['_total_masuk_tkjp'] * $jumTglBln;
             
                         $dcuPekerjaDay = $getData->jumlahDCUFungsiDay(date('Y-m-d'), $row['_id_fungsi'], "PEKERJA");
                         $dcuTKJPDay = $getData->jumlahDCUFungsiDay(date('Y-m-d'), $row['_id_fungsi'], "TKJP/MK");
             
-                        $jumlahDCUDayPeg[] = ($dcuPekerjaDay != 0) ? ceil($dcuPekerjaDay/$totalMasuk['_total_masuk_pekerja']*100) : 0;
-                        $jumlahDCUDay[] = ($dcuTKJPDay != 0) ? ceil($dcuTKJPDay/$totalMasuk['_total_masuk_tkjp']*100) : 0;
+                        $jumlahDCUDayPeg[] = ($dcuPekerjaDay != 0) ? ceil($dcuPekerjaDay / $totalMasuk['_total_masuk_pekerja'] *100) : 0;
+                        $jumlahDCUDay[] = ($dcuTKJPDay != 0) ? ceil($dcuTKJPDay / $totalMasuk['_total_masuk_tkjp'] *100) : 0;
                         
                         //$jumlahDCUMonth[] = ceil($getData->jumlahDCUFungsiMonth(date('m'), $row['_id_fungsi'])/$totalMasukBulan*100);
             
+                    } 
+                    
+                    foreach($getData->ListKategoriNoHR() as $row){
+                        $kategori[] = $row['_kategori'];
+
+                        $totalPekerjaHR[] = $getData->cekTotalKategoriPekerjaan($row['_id_kategori']);
+
+                        $dcuHRDay = $getData->jumlahDCUHRDay(date('Y-m-d'), $row['_id_kategori']);
+
+                        $jumlahDCUHRDay[] = ($dcuHRDay != 0) ? ceil($dcuHRDay / $getData->cekTotalKategoriPekerjaan($row['_id_kategori']) * 100) : 0;
+                        
+
                     } ?>
 
-        <label class="labelTitle"><i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;Dashboard</label>
+        <h5><i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;Dashboard</h5>
 
         <!-- Dashboar Total -->
         <div class="panel">
@@ -429,9 +441,7 @@
             <div class="dashboard-bottom">
                 <span class="color6">Grafik Checkup Pekerja Fungsi Hari Ini</span>
                 <div class="table-dashboard">
-                    <div style="width:600px;font-size:10px;margin:0 auto;">
-                        <canvas id="chartDayPeg"></canvas>
-                    </div>
+                    <canvas id="chartDayPeg" style="width:100%;height:100%;"></canvas>
                 </div>
                 
             </div>
@@ -439,9 +449,7 @@
             <div class="dashboard-bottom">
                 <span class="color6">Grafik Checkup TKJP/MK Fungsi Hari Ini</span>
                 <div class="table-dashboard">
-                    <div style="width:600px;font-size:10px;margin:0 auto;">
-                        <canvas id="chartDayTKJP"></canvas>
-                    </div>
+                    <canvas id="chartDayTKJP" style="width:100%;height:100%;"></canvas>
                 </div>
                 
             </div>
@@ -505,115 +513,95 @@
         <!-- Hasil Checkup -->
         <div class="panel-bottom">
             <div class="dashboard-bottom">
-                <span class="color6">Daily Checkup Pekerja : <?= strftime('%d %B %Y', strtotime(date('Y-m-d'))); ?> (<?= $getData->cekDCUbyTgl(date('d'), date('m'), date('Y'), "PEKERJA"); ?>)</span>
-                <?php
-                    if($getData->cekDCUbyTgl(date('d'), date('m'), date('Y'), "PEKERJA") > 0){ ?>
-                        <div class="table-dashboard">
-                            <table class="table-style">
-                                <tr>
-                                    <th>No. Pekerja</th>
-                                    <th>Nama Pekerja</th>
-                                    <th>Fungsi</th>
-                                    <th style="text-align:center;">Sis.</th>
-                                    <th style="text-align:center;">Dias.</th>
-                                    <th style="text-align:center;">DN.</th>
-                                    <th style="text-align:center;">Suhu</th>
-                                    <th style="text-align:center;">Frek. Nafas</th>
-                                    <th style="text-align:center;">Keterangan (Fit/Unfit)</th>
-                                    <th style="text-align:center;">Waktu Checkup</th>
-                                    <th>Pemeriksa (Medic)</th>
-                                </tr>
-                                <?php
-                                    foreach($getData->listDCUAllbyDate(date('d'), date('m'), date('Y'), "PEKERJA") as $row){ ?>
-                                        <tr>
-                                            <td><?= $row['_id_pekerja']; ?></td>
-                                            <td><?= $row['_nama_pekerja']; ?></td>
-                                            <td><?= $row['_nama_fungsi']; ?></td>
-                                            <td style="text-align:center;"><?= $row['_sistolik']; ?></td>
-                                            <td style="text-align:center;"><?= $row['_diastolik']; ?></td>
-                                            <td style="text-align:center;"><?= $row['_denyut_nadi']; ?></td>
-                                            <td style="text-align:center;"><?= $row['_suhu_tubuh']; ?></td>
-                                            <td style="text-align:center;"><?= $row['_frekuensi_nafas']; ?></td>
-                                            <td>
-                                                <span class="span-ket" style="background-color:<?= ($row['_keterangan']) == "FIT" ? 'green' : 'red'; ?>">
-                                                    <?= $row['_keterangan']; ?>
-                                                </span>
-                                            </td>
-                                            <td style="text-align:center;"><?= $row['_waktu']; ?></td>
-                                            <td>
-                                                <?php
-                                                    $dataDCU = $getData->getDataDCU($row['_id_pekerja'], date('d'), date('m'), date('Y'));
-                                                    $dataMedic = $getData->getDataPekerja($dataDCU['_medic']);
-                                                ?>
-                                                    <?= $dataMedic['_nama_pekerja']; ?>
-                                            </td>
-                                        </tr>
-                              <?php }
-                                ?>
-                            </table>
-                        </div>
-              <?php }
-                    else{ ?>
-                        <br>
-                        <span style="color:red;">Belum Ada Data Checkup !</span>
-              <?php } ?>
-
+                <span class="color6">Total Kategori High Risk</span>
+                <div class="table-dashboard">
+                    <canvas id="chartHR" style="width:100%;height:100%;"></canvas>
+                </div>
                 
             </div>
             <div class="dashboard-bottom">
-                <span class="color6">Daily Checkup TKJP/MK  : <?= strftime('%d %B %Y', strtotime(date('Y-m-d'))); ?> (<?= $getData->cekDCUbyTgl(date('d'), date('m'), date('Y'), "TKJP/MK"); ?>)</span>
-                <?php   
-                    if($getData->cekDCUbyTgl(date('d'), date('m'), date('Y'), "TKJP/MK") > 0){ ?>
-                        <div class="table-dashboard">
-                            <table class="table-style">
-                                <tr>
-                                    <th>No. TKJP/MK</th>
-                                    <th>Nama TKJP/MK</th>
-                                    <th>Fungsi</th>
-                                    <th style="text-align:center;">Sis.</th>
-                                    <th style="text-align:center;">Dias.</th>
-                                    <th style="text-align:center;">DN.</th>
-                                    <th style="text-align:center;">Suhu</th>
-                                    <th style="text-align:center;">Frek. Nafas</th>
-                                    <th style="text-align:center;">Keterangan (Fit/Unfit)</th>
-                                    <th style="text-align:center;">Waktu Checkup</th>
-                                    <th>Pemeriksa (Medic)</th>
-                                </tr>
-                                <?php
-                                    foreach($getData->listDCUAllbyDate(date('d'), date('m'), date('Y'), "TKJP/MK") as $row){ ?>
-                                        <tr>
-                                            <td><?= $row['_id_pekerja']; ?></td>
-                                            <td><?= $row['_nama_pekerja']; ?></td>
-                                            <td><?= $row['_nama_fungsi']; ?></td>
-                                            <td style="text-align:center;"><?= $row['_sistolik']; ?></td>
-                                            <td style="text-align:center;"><?= $row['_diastolik']; ?></td>
-                                            <td style="text-align:center;"><?= $row['_denyut_nadi']; ?></td>
-                                            <td style="text-align:center;"><?= $row['_suhu_tubuh']; ?></td>
-                                            <td style="text-align:center;"><?= $row['_frekuensi_nafas']; ?></td>
-                                            <td>
-                                                <span class="span-ket" style="background-color:<?= ($row['_keterangan']) == "FIT" ? 'green' : 'red'; ?>">
-                                                    <?= $row['_keterangan']; ?>
-                                                </span>
-                                            </td>
-                                            <td style="text-align:center;"><?= $row['_waktu']; ?></td>
-                                            <td>
-                                                <?php
-                                                    $dataDCU = $getData->getDataDCU($row['_id_pekerja'], date('d'), date('m'), date('Y'));
-                                                    $dataMedic = $getData->getDataPekerja($dataDCU['_medic']);
-                                                ?>
-                                                    <?= $dataMedic['_nama_pekerja']; ?>
-                                            </td>
-                                        </tr>
-                              <?php }
-                                ?>
-                            </table>
-                        </div>
-             <?php }
-                   else { ?>
-                        <br>
-                        <span style="color:red;">Belum Ada Data Checkup !</span>
-             <?php } ?>
+                <span class="color6">Grafik Checkup Harian</span>
+                <div class="table-dashboard">
+                    <canvas id="chartHRDay" style="width:100%;height:100%;"></canvas>
+                </div>
+
             </div>
+            <div class="dashboard-bottom">
+                <span class="color6">Grafik Checkup Harian</span>
+                <div class="table-dashboard">
+                    <canvas id="chartHRMonth" style="width:100%;height:100%;"></canvas>
+                </div>
+
+            </div>
+
+            <script>
+                //Grafik Pekerja Kategori High Risk
+                var ctxHR = document.getElementById("chartHR").getContext('2d');
+                var myChartHR = new Chart(ctxHR, {
+                    type: 'doughnut',
+                    data: {
+                        labels: <?php echo json_encode($kategori); ?>,
+                        datasets: [{
+                            label: 'Grafik Total Kategori High Risk',
+                            data: <?php echo json_encode($totalPekerjaHR); ?>,
+                            backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de','#008B8B','#CD5C5C']
+                            
+                        }]
+                    },
+                    
+                });
+
+                //Grafik Checkup High Risk Hari Ini
+                var ctxDayHR = document.getElementById("chartHRDay").getContext('2d');
+                var myChartDayHR = new Chart(ctxDayHR, {
+                    type: 'bar',
+                    data: {
+                        labels: <?php echo json_encode($kategori); ?>,
+                        datasets: [{
+                            label: 'Grafik Checkup Kategori High Risk (%)',
+                            data: <?php echo json_encode($jumlahDCUHRDay); ?>,
+                            backgroundColor: 'rgba(0, 184, 173, 0.5)',
+                            borderColor: 'rgba(0, 184, 173, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero:true
+                                }
+                            }]
+                        }
+                    }
+                });
+
+                //Grafik Checkup High Risk Bulan Ini
+                var ctxMonthHR = document.getElementById("chartHRMonth").getContext('2d');
+                var myChartMonthHR = new Chart(ctxMonthHR, {
+                    type: 'bar',
+                    data: {
+                        labels: <?php echo json_encode($kategori); ?>,
+                        datasets: [{
+                            label: 'Grafik Checkup Kategori High Risk (%)',
+                            data: <?php echo json_encode($jumlahDCUHRMonth); ?>,
+                            backgroundColor: 'rgba(0, 184, 173, 0.5)',
+                            borderColor: 'rgba(0, 184, 173, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero:true
+                                }
+                            }]
+                        }
+                    }
+                });
+
+            </script>
         </div>
 
         <?php
