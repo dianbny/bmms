@@ -128,6 +128,16 @@
 			return $result;
 		}
 
+		//List Data Kategori
+        function ListKategoriNoHR(){
+			$dataKategori = mysqli_query($this->koneksi,"SELECT * FROM _tb_kategori_pekerjaan WHERE _kategori != 'No High Risk' ORDER BY _id_kategori");
+			while($listKategori = mysqli_fetch_assoc($dataKategori)){
+				$result[] = $listKategori;
+			}
+
+			return $result;
+		}
+
 		//Ambil Nama Kategori
 		function getKategoriPekerjaan($id){
 			$idFilter = mysqli_real_escape_string($this->koneksi, $id);
@@ -136,6 +146,16 @@
 			$getKategori = mysqli_fetch_assoc($dataKategori);
 			
 			return $getKategori;
+		}
+
+		//Ambil Jumlah Kategori
+		function cekTotalKategoriPekerjaan($id){
+			$idFilter = mysqli_real_escape_string($this->koneksi, $id);
+
+			$dataKategori = mysqli_query($this->koneksi,"SELECT * FROM _tb_pekerja_pegawai WHERE _kategori_pekerjaan = '$idFilter'");
+			$cekKategori = mysqli_num_rows($dataKategori);
+			
+			return $cekKategori;
 		}
 
 		//Cek Perusahaan 
@@ -872,6 +892,18 @@
 			$statusFilter = mysqli_real_escape_string($this->koneksi, $status);
 
 			$dataDCU = mysqli_query($this->koneksi,"SELECT * FROM _tb_daily_checkup, _tb_pekerja_pegawai, _tb_fungsi WHERE _tb_daily_checkup._id_pekerja = _tb_pekerja_pegawai._id_pekerja AND _tb_fungsi._id_fungsi = _tb_pekerja_pegawai._fungsi AND _tb_daily_checkup._tgl_dcu = '$tglFilter' AND _tb_pekerja_pegawai._fungsi = '$fungsiFilter' AND _tb_pekerja_pegawai._status = '$statusFilter'");
+
+			$cekJumlah = mysqli_num_rows($dataDCU);
+			
+			return $cekJumlah;
+		}
+
+		//Jumlah DCU Fungsi Perhari
+		function jumlahDCUHRDay($tgl, $kategori){
+			$tglFilter = mysqli_real_escape_string($this->koneksi, $tgl);
+			$kategoriFilter = mysqli_real_escape_string($this->koneksi, $kategori);
+			
+			$dataDCU = mysqli_query($this->koneksi,"SELECT * FROM _tb_daily_checkup, _tb_pekerja_pegawai, _tb_kategori_pekerjaan WHERE _tb_daily_checkup._id_pekerja = _tb_pekerja_pegawai._id_pekerja AND _tb_kategori_pekerjaan._id_kategori = _tb_pekerja_pegawai._kategori_pekerjaan AND _tb_daily_checkup._tgl_dcu = '$tglFilter' AND _tb_pekerja_pegawai._kategori_pekerjaan = '$kategoriFilter' ");
 
 			$cekJumlah = mysqli_num_rows($dataDCU);
 			
