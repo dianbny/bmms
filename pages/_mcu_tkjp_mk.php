@@ -15,7 +15,7 @@
 
 ?>
 
-<label class="labelTitle"><i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;Medical Checkup TKJP/MK</label>
+<h5><i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;Medical Checkup TKJP/MK</h5>
 
 <?php
     if($getData->cekJumlahPekerjaTKJP() > 0){ ?>

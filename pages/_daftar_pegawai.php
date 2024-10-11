@@ -14,7 +14,7 @@
     $_SESSION['page'] = $_GET['page'];
 ?>
 
-<label class="labelTitle"><i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;Daftar Pekerja</label>
+<h5><i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;Daftar Pekerja</h5>
 
 <?php
     if($getData->cekJumlahPekerjaPegawai() > 0){ ?>

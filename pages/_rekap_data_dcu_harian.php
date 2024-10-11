@@ -3,7 +3,7 @@
         header('location:logout');
     }
 ?>
-<label class="labelTitle"><i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;Rekap Data Daily Checkup</label>
+<h5><i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;Rekap Data Daily Checkup</h5>
 
 <?php
     if($getData->cekJumlahPekerja() > 0){ ?>
@@ -34,74 +34,66 @@
                                 },
                                     function(isConfirm){
                                         if (isConfirm) {
-                                            window.location.href = "rekap-data-checkup";
+                                            window.location.href = "rekap-data-checkup-harian";
                                         }
                             }); }, 500);
                     </script>
           <?php }
-                elseif(!preg_match("/^[0-9]*$/", $_POST['month'])){ ?>
+                elseif(!preg_match("/^[0-9\/-]*$/", $_POST['tanggal'])){ ?>
                     <script>
                         setTimeout(function() { 
                             swal({
                                 title: "Terjadi Kesalahan !",
-                                text: "Format input bulan tidak valid !",
+                                text: "Format input tanggal tidak valid !",
                                 type: "error",
                                 confirmButtonText: "OK"
                                 },
                                     function(isConfirm){
                                         if (isConfirm) {
-                                            window.location.href = "rekap-data-checkup";
+                                            window.location.href = "rekap-data-checkup-harian";
                                         }
                             }); }, 500);
                     </script>
           <?php }
-                elseif(!preg_match("/^[0-9]*$/", $_POST['year'])){ ?>
-                    <script>
-                        setTimeout(function() { 
-                            swal({
-                                title: "Terjadi Kesalahan !",
-                                text: "Tahun hanya boleh mengandung angka !",
-                                type: "error",
-                                confirmButtonText: "OK"
-                                },
-                                    function(isConfirm){
-                                        if (isConfirm) {
-                                            window.location.href = "rekap-data-checkup";
-                                        }
-                            }); }, 500);
-                    </script>
-          <?php }
+                
                 else {
-                    $jumTgl = cal_days_in_month(CAL_GREGORIAN, $_POST['month'], $_POST['year']);
                     $namaFungsi = $getData->getNamaFungsi($_POST['function']); ?>
-                    <span style="font-size:14px;">DATA CHECKUP <i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp; FUNGSI : <?= $namaFungsi['_nama_fungsi']; ?> | BULAN : <?= $_POST['month']; ?> | TAHUN : <?= $_POST['year']; ?>
+                    <span style="font-size:14px;">DATA CHECKUP <i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp; FUNGSI : <?= $namaFungsi['_nama_fungsi']; ?> | TANGGAL : <?= strftime('%d %B %Y', strtotime($_POST['tanggal'])); ?> 
                     <div class="table-layout">
                         <table class="table-style">
-                            <tr>
-                                <th rowspan="2">No.</th>
-                                <th rowspan="2">No. Pekerja</th>
-                                <th rowspan="2">Nama Pekerja/TKJP/MK</th>
-                                <th rowspan="2">Fungsi</th>
-                                <th rowspan="2">Status</th>
-                                <th rowspan="2">Kategori Pekerjaan</th>
-                                <th rowspan="2">Total DCU</th>
-                                <?php
-                                    for ($i = 1; $i <= $jumTgl; $i++){ ?>
-
-                                        <th colspan="6" style="text-align:center;"><?= $i; ?></th>
-                            <?php } ?>
-                            </tr>
-                            
+                        <tr>
+                            <th rowspan="2">No.</th>
+                            <th rowspan="2">No. Pekerja/TKJP/MK</th>
+                            <th rowspan="2">Nama Pekerja/TKJP/MK</th>
+                            <th rowspan="2">Fungsi</th>
+                            <th rowspan="2">Status</th>
+                            <th rowspan="2">Kategori Pekerjaan</th>
+                            <th style="text-align:center;" rowspan="2">Checkup</th>
+                            <th style="text-align:center;" colspan="5">Pemeriksaan Vital</th>
+                            <th style="text-align:center;" colspan="10">Anamnesis/Pemeriksaan Fisik</th>
+                            <th style="text-align:center;" rowspan="2">Hasil (Fit/Unfit)</th>
+                            <th style="text-align:center;" rowspan="2">Waktu</th>
+                            <th rowspan="2">Pemeriksa (Medic)</th>
+                            <th style="text-align:center;" colspan="2" rowspan="2">Aksi</th>
+                        
+                        </tr>
                                 <tr>
-                                <?php
-                                    for ($i = 1; $i <= $jumTgl; $i++){ ?>
-                                        <th style="text-align:center;">Sis.</th>
-                                        <th style="text-align:center;">Dia.</th>
-                                        <th style="text-align:center;">DN</th>
-                                        <th style="text-align:center;">Suhu</th>
-                                        <th style="text-align:center;">Frek. Nafas</th>
-                                        <th style="text-align:center;">Ket.</th>
-                            <?php } ?>
+                                    <th style="text-align:center;">Sistolik</th>
+                                    <th style="text-align:center;">Diastolik</th>
+                                    <th style="text-align:center;">Denyut Nadi</th>
+                                    <th style="text-align:center;">Suhu Tubuh</th>
+                                    <th>Frekuensi Pernafasan</th>
+
+                                    <th>Riwayat Penyakit</th>
+                                    <th>Detail Riwayat</th>
+                                    <th>Mengonsumsi Obat</th>
+                                    <th>Tujuan Mengonsumsi Obat</th>
+                                    <th>Keluhan</th>
+                                    <th>Detail Keluhan</th>
+                                    <th>Tingkat Kesadaran</th>
+                                    <th>Pemeriksaan Mata</th>
+                                    <th>Pemeriksaan keseimbangan</th>
+                                    <th>Gejala Pengaruh Alkohol/Napza</th>
                                 </tr>
                             
                             <?php
@@ -116,76 +108,245 @@
                                             <td><?= $row['_nama_fungsi']; ?></td>
                                             <td><?= $row['_status']; ?></td>
                                             <td><?= $row['_kategori']; ?></td>
-                                            <td style="text-align:center;"><?= $getData->cekDCUPekerjaBln($row['_id_pekerja'], (isset($_POST['month']) && !empty($_POST['month'])) ? $_POST['month'] : date('m'), (isset($_POST['year']) && !empty($_POST['year'])) ? $_POST['year'] : date('Y')); ?></td>
-                                            <?php
-                                                for ($i = 1; $i <= $jumTgl; $i++){ ?>
-                                                    <td style="text-align:center;">
-                                                        <?php
-                                                            if($getData->cekDCUPekerja($row['_id_pekerja'], $i, (isset($_POST['month']) && !empty($_POST['month'])) ? $_POST['month'] : date('m'), (isset($_POST['year']) && !empty($_POST['year'])) ? $_POST['year'] : date('Y')) > 0){
-                                                                $dataDCU = $getData->getDataDCU($row['_id_pekerja'], $i, (isset($_POST['month']) && !empty($_POST['month'])) ? $_POST['month'] : date('m'), (isset($_POST['year']) && !empty($_POST['year'])) ? $_POST['year'] : date('Y'));
-                                                                echo $dataDCU['_sistolik'];
-                                                            }
-                                                            
-                                                        ?>
-                                                    </td>
-                                                    <td style="text-align:center;">
-                                                        <?php
-                                                        if($getData->cekDCUPekerja($row['_id_pekerja'], $i, (isset($_POST['month']) && !empty($_POST['month'])) ? $_POST['month'] : date('m'), (isset($_POST['year']) && !empty($_POST['year'])) ? $_POST['year'] : date('Y')) > 0){
-                                                            $dataDCU = $getData->getDataDCU($row['_id_pekerja'], $i, (isset($_POST['month']) && !empty($_POST['month'])) ? $_POST['month'] : date('m'), (isset($_POST['year']) && !empty($_POST['year'])) ? $_POST['year'] : date('Y'));
-                                                                echo $dataDCU['_diastolik'];
-                                                            }
-                                                            
-                                                        ?>
-                                                    </td>
-                                                    <td style="text-align:center;">
-                                                        <?php
-                                                            if($getData->cekDCUPekerja($row['_id_pekerja'], $i, (isset($_POST['month']) && !empty($_POST['month'])) ? $_POST['month'] : date('m'), (isset($_POST['year']) && !empty($_POST['year'])) ? $_POST['year'] : date('Y')) > 0){
-                                                                $dataDCU = $getData->getDataDCU($row['_id_pekerja'], $i, (isset($_POST['month']) && !empty($_POST['month'])) ? $_POST['month'] : date('m'), (isset($_POST['year']) && !empty($_POST['year'])) ? $_POST['year'] : date('Y'));
-                                                                echo $dataDCU['_denyut_nadi'];
-                                                            }
-                                                            
-                                                        ?> 
-                                                    </td>
-                                                    <td>
-                                                        <?php
-                                                            if($getData->cekDCUPekerja($row['_id_pekerja'], $i, (isset($_POST['month']) && !empty($_POST['month'])) ? $_POST['month'] : date('m'), (isset($_POST['year']) && !empty($_POST['year'])) ? $_POST['year'] : date('Y')) > 0){
-                                                                $dataDCU = $getData->getDataDCU($row['_id_pekerja'], $i, (isset($_POST['month']) && !empty($_POST['month'])) ? $_POST['month'] : date('m'), (isset($_POST['year']) && !empty($_POST['year'])) ? $_POST['year'] : date('Y'));
-                                                                echo $dataDCU['_suhu_tubuh'];
-                                                            }
-                                                            
-                                                        ?> 
-                                                    </td>
-                                                    <td>
-                                                        <?php
-                                                            if($getData->cekDCUPekerja($row['_id_pekerja'], $i, (isset($_POST['month']) && !empty($_POST['month'])) ? $_POST['month'] : date('m'), (isset($_POST['year']) && !empty($_POST['year'])) ? $_POST['year'] : date('Y')) > 0){
-                                                                $dataDCU = $getData->getDataDCU($row['_id_pekerja'], $i, (isset($_POST['month']) && !empty($_POST['month'])) ? $_POST['month'] : date('m'), (isset($_POST['year']) && !empty($_POST['year'])) ? $_POST['year'] : date('Y'));
-                                                                echo $dataDCU['_frekuensi_nafas'];
-                                                            }
-                                                            
-                                                        ?> 
-                                                    </td>
-                                                    <td style="text-align:center;">
-                                                        <?php
-                                                            if($getData->cekDCUPekerja($row['_id_pekerja'], $i, (isset($_POST['month']) && !empty($_POST['month'])) ? $_POST['month'] : date('m'), (isset($_POST['year']) && !empty($_POST['year'])) ? $_POST['year'] : date('Y')) > 0){
-                                                                $dataDCU = $getData->getDataDCU($row['_id_pekerja'], $i, (isset($_POST['month']) && !empty($_POST['month'])) ? $_POST['month'] : date('m'), (isset($_POST['year']) && !empty($_POST['year'])) ? $_POST['year'] : date('Y'));
-
-                                                                    if($dataDCU['_keterangan'] == "FIT"){ ?>
-                                                                        <span style="font-size:14px;color:green;"><i class="fa fa-check-circle" aria-hidden="true"></i></span>
-                                                            <?php }
-                                                                    else { ?>
-                                                                        <span style="font-size:14px;color:red;"><i class="fa fa-times-circle" aria-hidden="true"></i></span>
-                                                            <?php }
-                                                            }
-                                                            
-                                                        ?>
-                                                    </td>
-                                        <?php } ?>
+                                            <td style="text-align:center;">
+                                                <?php
+                                                    if($getData->cekDCUPekerja($row['_id_pekerja'], date('d'), date('m'), date('Y')) > 0){ ?>
+                                                        <span style="font-size:14px;color:black;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
+                                            <?php }
+                                                    else { ?>
+                                                        <a href="input-data-checkup-<?= $row['_id_pekerja']; ?>" class="linkDetail"><i class="fa fa-stethoscope" aria-hidden="true"></i></a>
+                                            <?php }
+                                                    ?>
+                                            </td>
+                                            <td style="text-align:center;">
+                                                <?php
+                                                    if($getData->cekDCUPekerja($row['_id_pekerja'], date('d'), date('m'), date('Y')) > 0){
+                                                        $dataDCU = $getData->getDataDCU($row['_id_pekerja'], date('d'), date('m'), date('Y'));
+                                                        echo $dataDCU['_sistolik'];
+                                                    }
+                                                    else {
+                                                        echo "-";
+                                                    }
+                                                ?>
+                                            </td>
+                                            <td style="text-align:center;">
+                                                <?php
+                                                    if($getData->cekDCUPekerja($row['_id_pekerja'], date('d'), date('m'), date('Y')) > 0){
+                                                        $dataDCU = $getData->getDataDCU($row['_id_pekerja'], date('d'), date('m'), date('Y'));
+                                                        echo $dataDCU['_diastolik'];
+                                                    }
+                                                    else {
+                                                        echo "-";
+                                                    }
+                                                ?>
+                                            </td>
+                                            <td style="text-align:center;">
+                                                <?php
+                                                    if($getData->cekDCUPekerja($row['_id_pekerja'], date('d'), date('m'), date('Y')) > 0){
+                                                        $dataDCU = $getData->getDataDCU($row['_id_pekerja'], date('d'), date('m'), date('Y'));
+                                                        echo $dataDCU['_denyut_nadi'];
+                                                    }
+                                                    else {
+                                                        echo "-";
+                                                    }
+                                                ?>
+                                            </td>
+                                            <td style="text-align:center;">
+                                                <?php
+                                                    if($getData->cekDCUPekerja($row['_id_pekerja'], date('d'), date('m'), date('Y')) > 0){
+                                                        $dataDCU = $getData->getDataDCU($row['_id_pekerja'], date('d'), date('m'), date('Y'));
+                                                        echo $dataDCU['_suhu_tubuh'];
+                                                    }
+                                                    else {
+                                                        echo "-";
+                                                    }
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <?php
+                                                    if($getData->cekDCUPekerja($row['_id_pekerja'], date('d'), date('m'), date('Y')) > 0){
+                                                        $dataDCU = $getData->getDataDCU($row['_id_pekerja'], date('d'), date('m'), date('Y'));
+                                                        echo $dataDCU['_frekuensi_nafas'];
+                                                    }
+                                                    else {
+                                                        echo "-";
+                                                    }
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <?php
+                                                    if($getData->cekDCUPekerja($row['_id_pekerja'], date('d'), date('m'), date('Y')) > 0){
+                                                        $dataDCU = $getData->getDataDCU($row['_id_pekerja'], date('d'), date('m'), date('Y'));
+                                                        echo $dataDCU['_riwayat_penyakit'];
+                                                    }
+                                                    else {
+                                                        echo "-";
+                                                    }
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <?php
+                                                    if($getData->cekDCUPekerja($row['_id_pekerja'], date('d'), date('m'), date('Y')) > 0){
+                                                        $dataDCU = $getData->getDataDCU($row['_id_pekerja'], date('d'), date('m'), date('Y'));
+                                                        echo $dataDCU['_detail_riwayat'];
+                                                    }
+                                                    else {
+                                                        echo "-";
+                                                    }
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <?php
+                                                    if($getData->cekDCUPekerja($row['_id_pekerja'], date('d'), date('m'), date('Y')) > 0){
+                                                        $dataDCU = $getData->getDataDCU($row['_id_pekerja'], date('d'), date('m'), date('Y'));
+                                                        echo $dataDCU['_konsumsi_obat'];
+                                                    }
+                                                    else {
+                                                        echo "-";
+                                                    }
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <?php
+                                                    if($getData->cekDCUPekerja($row['_id_pekerja'], date('d'), date('m'), date('Y')) > 0){
+                                                        $dataDCU = $getData->getDataDCU($row['_id_pekerja'], date('d'), date('m'), date('Y'));
+                                                        echo $dataDCU['_tujuan_obat'];
+                                                    }
+                                                    else {
+                                                        echo "-";
+                                                    }
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <?php
+                                                    if($getData->cekDCUPekerja($row['_id_pekerja'], date('d'), date('m'), date('Y')) > 0){
+                                                        $dataDCU = $getData->getDataDCU($row['_id_pekerja'], date('d'), date('m'), date('Y'));
+                                                        echo $dataDCU['_status_keluhan'];
+                                                    }
+                                                    else {
+                                                        echo "-";
+                                                    }
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <?php
+                                                    if($getData->cekDCUPekerja($row['_id_pekerja'], date('d'), date('m'), date('Y')) > 0){
+                                                        $dataDCU = $getData->getDataDCU($row['_id_pekerja'], date('d'), date('m'), date('Y'));
+                                                        echo $dataDCU['_keluhan'];
+                                                    }
+                                                    else {
+                                                        echo "-";
+                                                    }
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <?php
+                                                    if($getData->cekDCUPekerja($row['_id_pekerja'], date('d'), date('m'), date('Y')) > 0){
+                                                        $dataDCU = $getData->getDataDCU($row['_id_pekerja'], date('d'), date('m'), date('Y'));
+                                                        echo $dataDCU['_tingkat_kesadaran'];
+                                                    }
+                                                    else {
+                                                        echo "-";
+                                                    }
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <?php
+                                                    if($getData->cekDCUPekerja($row['_id_pekerja'], date('d'), date('m'), date('Y')) > 0){
+                                                        $dataDCU = $getData->getDataDCU($row['_id_pekerja'], date('d'), date('m'), date('Y'));
+                                                        echo $dataDCU['_pemeriksaan_mata'];
+                                                    }
+                                                    else {
+                                                        echo "-";
+                                                    }
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <?php
+                                                    if($getData->cekDCUPekerja($row['_id_pekerja'], date('d'), date('m'), date('Y')) > 0){
+                                                        $dataDCU = $getData->getDataDCU($row['_id_pekerja'], date('d'), date('m'), date('Y'));
+                                                        echo $dataDCU['_pemeriksaan_keseimbangan'];
+                                                    }
+                                                    else {
+                                                        echo "-";
+                                                    }
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <?php
+                                                    if($getData->cekDCUPekerja($row['_id_pekerja'], date('d'), date('m'), date('Y')) > 0){
+                                                        $dataDCU = $getData->getDataDCU($row['_id_pekerja'], date('d'), date('m'), date('Y'));
+                                                        echo $dataDCU['_pengaruh_alkohol'];
+                                                    }
+                                                    else {
+                                                        echo "-";
+                                                    }
+                                                ?>
+                                            </td>
+                                            <td style="text-align:center;">
+                                                <?php
+                                                    if($getData->cekDCUPekerja($row['_id_pekerja'], date('d'), date('m'), date('Y')) > 0){
+                                                        $dataDCU = $getData->getDataDCU($row['_id_pekerja'], date('d'), date('m'), date('Y')); ?>
+                                                        <span class="span-ket-dcu" style="background-color:<?= ($dataDCU['_keterangan']) == "FIT" ? 'green' : 'red'; ?>">
+                                                            <?= $dataDCU['_keterangan']; ?>
+                                                        </span>
+                                                        
+                                            <?php }
+                                                    else {
+                                                        echo "-";
+                                                    }
+                                                ?>
+                                            </td>
+                                            <td style="text-align:center;">
+                                                <?php
+                                                    if($getData->cekDCUPekerja($row['_id_pekerja'], date('d'), date('m'), date('Y')) > 0){
+                                                        $dataDCU = $getData->getDataDCU($row['_id_pekerja'], date('d'), date('m'), date('Y'));
+                                                        echo $dataDCU['_waktu'];
+                                                    }
+                                                    else {
+                                                        echo "-";
+                                                    }
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <?php
+                                                    if($getData->cekDCUPekerja($row['_id_pekerja'], date('d'), date('m'), date('Y')) > 0){
+                                                        $dataDCU = $getData->getDataDCU($row['_id_pekerja'], date('d'), date('m'), date('Y'));
+                                                        $dataMedic = $getData->getDataPekerja($dataDCU['_medic']);
+        
+                                                        echo $dataMedic['_nama_pekerja'];
+                                                    }
+                                                    else {
+                                                        echo "-";
+                                                    }
+                                                ?>
+                                            </td>
+                                            <td style="text-align:center;">
+                                                <?php
+                                                    if($getData->cekDCUPekerja($row['_id_pekerja'], date('d'), date('m'), date('Y')) > 0){ ?>
+                                                        <a href="edit-data-checkup-<?= $row['_id_pekerja']; ?>" class="linkDetail"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                            <?php }
+                                                    else {
+                                                        echo ".....";
+                                                    }
+                                                ?>
+                                            </td>
+                                            <td style="text-align:center;">
+                                                <?php
+                                                    if($getData->cekDCUPekerja($row['_id_pekerja'], date('d'), date('m'), date('Y')) > 0){ ?>
+                                                        <a href="javascript:void(0)" class="linkError konfirmDeleteDCU" data-id="<?= $row['_id_pekerja']; ?>"><i class="fa fa-times-circle" aria-hidden="true"></i></a>
+                                            <?php }
+                                                    else {
+                                                        echo ".....";
+                                                    }
+                                                ?>
+                                            </td>
                                         </tr>
                                 <?php } 
                                 }
                                 else { ?>
                                     <tr>
-                                        <td colspan="<?= 6 + ($jumTgl*5); ?>"><span style="color:red;">Data Tidak Ditemukan !</span></td>
+                                        <td style="text-align:center;" colspan="26"><span style="color:red;">Data Tidak Ditemukan !</span></td>
                                     </tr>
                         <?php }
                             } ?>
@@ -195,7 +356,7 @@
          <?php  }
             }
             else { ?>
-                <span style="color:red;font-size:13px;">Pilih Fungsi, Bulan dan Tahun Terlebih Dahulu !</span><br>
+                <span style="color:red;font-size:13px;">Pilih Fungsi dan Tanggal Terlebih Dahulu !</span><br>
       <?php }  ?>
 <?php }
       else { ?>

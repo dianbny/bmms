@@ -8,7 +8,7 @@
     $mulai = ($page>1) ? ($page * $halaman) - $halaman : 0;
 ?>
 
-<label class="labelTitle"><i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;Daftar Pekerja / TKJP/ Mitra Kerja</label>
+<h5><i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;Daftar Pekerja / TKJP/ Mitra Kerja</h5>
 
 <?php
     if($getData->cekJumlahPekerja() > 0){ ?>

@@ -15,7 +15,7 @@
     
 ?>
 
-<label class="labelTitle"><i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;Detail DCU Pekerja</label>
+<h5><i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;Detail DCU Pekerja</h5>
 <br><br>
 
 <span style="font-size:12px;font-weight:bold;">Detail Data Checkup</span><br><br>

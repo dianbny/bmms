@@ -15,7 +15,7 @@
 
 ?>
 
-<label class="labelTitle"><i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;Medical Checkup Pekerja</label>
+<h5><i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;Medical Checkup Pekerja</h5>
 
 <?php
     if($getData->cekJumlahPekerjaPegawai() > 0){ ?>

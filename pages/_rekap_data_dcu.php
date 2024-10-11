@@ -3,7 +3,7 @@
         header('location:logout');
     }
 ?>
-<label class="labelTitle"><i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;Rekap Data Daily Checkup</label>
+<h5><i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;Rekap Data Daily Checkup</h5>
 
 <?php
     if($getData->cekJumlahPekerja() > 0){ ?>
@@ -203,7 +203,7 @@
                                 }
                                 else { ?>
                                     <tr>
-                                        <td colspan="<?= 6 + ($jumTgl*5); ?>"><span style="color:red;">Data Tidak Ditemukan !</span></td>
+                                        <td colspan="<?= 7 + ($jumTgl*6); ?>"><span style="color:red;">Data Tidak Ditemukan !</span></td>
                                     </tr>
                         <?php }
                             } ?>

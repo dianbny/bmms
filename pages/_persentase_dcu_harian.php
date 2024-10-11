@@ -5,7 +5,7 @@
     
 ?>
 
-<label class="labelTitle"><i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;Persentase Daily Checkup Harian</label>
+<h5><i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;Persentase Daily Checkup Harian</h5>
 <br><br>
 <?php
     if($getData->cekJumlahPekerja() > 0){ ?>
