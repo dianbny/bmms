@@ -54,7 +54,7 @@
                                 },
                                     function(isConfirm){
                                         if (isConfirm) {
-                                            window.location.href = "rekap-data-checkup";
+                                            window.location.href = "persentase-dcu-bulanan";
                                         }
                             }); }, 500);
                     </script>
@@ -70,7 +70,7 @@
                                 },
                                     function(isConfirm){
                                         if (isConfirm) {
-                                            window.location.href = "rekap-data-checkup";
+                                            window.location.href = "persentase-dcu-bulanan";
                                         }
                             }); }, 500);
                     </script>
@@ -86,7 +86,7 @@
                                 },
                                     function(isConfirm){
                                         if (isConfirm) {
-                                            window.location.href = "rekap-data-checkup";
+                                            window.location.href = "persentase-dcu-bulanan";
                                         }
                             }); }, 500);
                     </script>
@@ -175,7 +175,7 @@
                                 }
                                 else { ?>
                                     <tr>
-                                        <td colspan="<?= 6 + ($jumTgl*5); ?>"><span style="color:red;">Data Tidak Ditemukan !</span></td>
+                                        <td colspan="13"><span style="color:red;">Data Tidak Ditemukan !</span></td>
                                     </tr>
                         <?php }
                             } ?>
