@@ -126,6 +126,8 @@
                     <option value="Positif">Positif (Dalam Pengaruh Alkohol/Napza)</option>
                 </select>
 
+                <label for="catatan">Rekomendasi/Catatan &nbsp;<span style="color:red;font-size:15px;"></span></label><br>
+                <input type="text" name="catatan" value="<?= $dataDCU['_catatan']; ?>" placeholder="Isi Rekomendasi/Catatan (Jika Ada)" required><br>
         </fieldset>
 
         <button type="button" class="btnForm" onclick="window.location.href = 'data-checkup'">Kembali</button>
