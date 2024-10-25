@@ -42,6 +42,7 @@
                     <th style="text-align:center;" colspan="10">Anamnesis/Pemeriksaan Fisik</th>
                     <th style="text-align:center;" rowspan="2">Hasil (Fit/Unfit)</th>
                     <th style="text-align:center;" rowspan="2">Waktu</th>
+                    <th rowspan="2">Rekomendasi/Catatan</th>
                     <th rowspan="2">Pemeriksa (Medic)</th>
                     <th style="text-align:center;" colspan="2" rowspan="2">Aksi</th>
                 
@@ -315,6 +316,17 @@
                                             <?php
                                                 if($getData->cekDCUPekerja($row['_id_pekerja'], date('d'), date('m'), date('Y')) > 0){
                                                     $dataDCU = $getData->getDataDCU($row['_id_pekerja'], date('d'), date('m'), date('Y'));
+                                                    echo $dataDCU['_catatan'];
+                                                }
+                                                else {
+                                                    echo "-";
+                                                }
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <?php
+                                                if($getData->cekDCUPekerja($row['_id_pekerja'], date('d'), date('m'), date('Y')) > 0){
+                                                    $dataDCU = $getData->getDataDCU($row['_id_pekerja'], date('d'), date('m'), date('Y'));
                                                     $dataMedic = $getData->getDataPekerja($dataDCU['_medic']);
     
                                                     echo $dataMedic['_nama_pekerja'];
@@ -349,7 +361,7 @@
                                 }
                                 else { ?>
                                     <tr>
-                                        <td colspan="26" style="text-align:center;"><span style="color:red;">Data Tidak Ditemukan !</span></td>
+                                        <td colspan="27" style="text-align:center;"><span style="color:red;">Data Tidak Ditemukan !</span></td>
                                     </tr>
                           <?php }
                             }
@@ -566,6 +578,17 @@
                                             <?php
                                                 if($getData->cekDCUPekerja($row['_id_pekerja'], date('d'), date('m'), date('Y')) > 0){
                                                     $dataDCU = $getData->getDataDCU($row['_id_pekerja'], date('d'), date('m'), date('Y'));
+                                                    echo $dataDCU['_catatan'];
+                                                }
+                                                else {
+                                                    echo "-";
+                                                }
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <?php
+                                                if($getData->cekDCUPekerja($row['_id_pekerja'], date('d'), date('m'), date('Y')) > 0){
+                                                    $dataDCU = $getData->getDataDCU($row['_id_pekerja'], date('d'), date('m'), date('Y'));
                                                     $dataMedic = $getData->getDataPekerja($dataDCU['_medic']);
     
                                                     echo $dataMedic['_nama_pekerja'];
@@ -600,7 +623,7 @@
                                 }
                                 else { ?>
                                     <tr>
-                                        <td colspan="26" style="text-align:center;"><span style="color:red;">Data Tidak Ditemukan !</span></td>
+                                        <td colspan="27" style="text-align:center;"><span style="color:red;">Data Tidak Ditemukan !</span></td>
                                     </tr>
                           <?php }
                             }
@@ -817,6 +840,17 @@
                                             <?php
                                                 if($getData->cekDCUPekerja($row['_id_pekerja'], date('d'), date('m'), date('Y')) > 0){
                                                     $dataDCU = $getData->getDataDCU($row['_id_pekerja'], date('d'), date('m'), date('Y'));
+                                                    echo $dataDCU['_catatan'];
+                                                }
+                                                else {
+                                                    echo "-";
+                                                }
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <?php
+                                                if($getData->cekDCUPekerja($row['_id_pekerja'], date('d'), date('m'), date('Y')) > 0){
+                                                    $dataDCU = $getData->getDataDCU($row['_id_pekerja'], date('d'), date('m'), date('Y'));
                                                     $dataMedic = $getData->getDataPekerja($dataDCU['_medic']);
     
                                                     echo $dataMedic['_nama_pekerja'];
@@ -851,7 +885,7 @@
                                 }
                                 else { ?>
                                     <tr>
-                                        <td colspan="26" style="text-align:center;"><span style="color:red;">Data Tidak Ditemukan !</span></td>
+                                        <td colspan="27" style="text-align:center;"><span style="color:red;">Data Tidak Ditemukan !</span></td>
                                     </tr>
                           <?php }
                             }
@@ -893,6 +927,7 @@
                                     </span>
                                 </td>
                                 <td style="text-align:center;"><?= $row['_waktu']; ?></td>
+                                <td><?= $row['_catatan']; ?></td>
                                 <td>
                                     <?php
                                         $dataDCU = $getData->getDataDCU($row['_id_pekerja'], date('d'), date('m'), date('Y'));
@@ -907,7 +942,7 @@
                     <?php } ?>   
                             <tr>
                                 <td>Halaman</td>
-                                <td colspan="26" style="text-align:left;font-size:14px;">
+                                <td colspan="27" style="text-align:left;font-size:14px;">
                                     <?php
                                         for ($i=1; $i<=$pages ; $i++){ ?>
                                             <a href="data-checkup-halaman-<?= $i; ?>" class="linkDetail"><?= " ".$i." "; ?></a>
@@ -918,7 +953,7 @@
                  <?php }
                         else { ?>
                             <tr>
-                                <td colspan="26" style="text-align:center;"><span style="color:red;">Belum Ada Data Checkup !</span></td>
+                                <td colspan="27" style="text-align:center;"><span style="color:red;">Belum Ada Data Checkup !</span></td>
                             </tr>
                   <?php }
                     }
