@@ -488,6 +488,18 @@
 			return $result;
 		}
 
+		//List Data Pekerja
+        function listPekerjaAllbyKategori($kategori){
+			$kategoriFilter = mysqli_real_escape_string($this->koneksi, $kategori);
+			
+			$dataPekerja = mysqli_query($this->koneksi,"SELECT * FROM _tb_pekerja_pegawai, _tb_fungsi, _tb_kategori_pekerjaan WHERE _tb_pekerja_pegawai._fungsi = _tb_fungsi._id_fungsi AND _tb_pekerja_pegawai._kategori_pekerjaan = _tb_kategori_pekerjaan._id_kategori AND _tb_pekerja_pegawai._kategori_pekerjaan = '$kategoriFilter' ORDER BY _tb_pekerja_pegawai._nama_pekerja ASC");
+			while($listPekerja = mysqli_fetch_assoc($dataPekerja)){
+				$result[] = $listPekerja;
+			}
+
+			return $result;
+		}
+
 		function cekDCU($tgl, $bln, $thn){
 			$tglFilter = mysqli_real_escape_string($this->koneksi, $tgl);
 			$blnFilter = mysqli_real_escape_string($this->koneksi, $bln);
@@ -529,6 +541,17 @@
 			$statusFilter = mysqli_real_escape_string($this->koneksi, $status);
 
 			$dataDCU = mysqli_query($this->koneksi,"SELECT * FROM _tb_daily_checkup, _tb_pekerja_pegawai, _tb_fungsi WHERE _tb_daily_checkup._id_pekerja = _tb_pekerja_pegawai._id_pekerja AND _tb_pekerja_pegawai._fungsi = _tb_fungsi._id_fungsi AND _tb_daily_checkup._tgl_dcu = '$tglFilter' AND _tb_daily_checkup._keterangan = '$ket' AND _tb_fungsi._id_fungsi = '$fungsiFilter' AND _tb_pekerja_pegawai._status = '$statusFilter'");
+			$cekJumlah = mysqli_num_rows($dataDCU);
+			
+			return $cekJumlah;
+		}
+
+		function cekKeteranganDCUKategori($kategori, $tgl, $ket){
+			$kategoriFilter = mysqli_real_escape_string($this->koneksi, $kategori);
+			$tglFilter = mysqli_real_escape_string($this->koneksi, $tgl);
+			$ketFilter = mysqli_real_escape_string($this->koneksi, $ket);
+			
+			$dataDCU = mysqli_query($this->koneksi,"SELECT * FROM _tb_daily_checkup, _tb_pekerja_pegawai, _tb_kategori_pekerjaan WHERE _tb_daily_checkup._id_pekerja = _tb_pekerja_pegawai._id_pekerja AND _tb_pekerja_pegawai._kategori_pekerjaan = _tb_kategori_pekerjaan._id_kategori AND _tb_daily_checkup._tgl_dcu = '$tglFilter' AND _tb_daily_checkup._keterangan = '$ket' AND _tb_kategori_pekerjaan._id_kategori = '$kategoriFilter' ");
 			$cekJumlah = mysqli_num_rows($dataDCU);
 			
 			return $cekJumlah;
@@ -911,6 +934,19 @@
 		}
 
 		//Jumlah DCU Fungsi Perhari
+		function jumlahDCUHRMonth($bln, $thn, $kategori){
+			$blnFilter = mysqli_real_escape_string($this->koneksi, $bln);
+			$thnFilter = mysqli_real_escape_string($this->koneksi, $thn);
+			$kategoriFilter = mysqli_real_escape_string($this->koneksi, $kategori);
+			
+			$dataDCU = mysqli_query($this->koneksi,"SELECT * FROM _tb_daily_checkup, _tb_pekerja_pegawai, _tb_kategori_pekerjaan WHERE _tb_daily_checkup._id_pekerja = _tb_pekerja_pegawai._id_pekerja AND _tb_kategori_pekerjaan._id_kategori = _tb_pekerja_pegawai._kategori_pekerjaan AND MONTH(_tb_daily_checkup._tgl_dcu) = '$blnFilter' AND YEAR(_tb_daily_checkup._tgl_dcu) = '$thnFilter' AND _tb_pekerja_pegawai._kategori_pekerjaan = '$kategoriFilter' ");
+
+			$cekJumlah = mysqli_num_rows($dataDCU);
+			
+			return $cekJumlah;
+		}
+
+		//Jumlah DCU Fungsi Perhari
 		function jumlahDCUFungsiMonth($bln, $fungsi){
 			$blnFilter = mysqli_real_escape_string($this->koneksi, $bln);
 			$fungsiFilter = mysqli_real_escape_string($this->koneksi, $fungsi);
@@ -944,9 +980,76 @@
 		}
 
 
+		//Status Kotak P3K
+		function cekP3K(){
+			$dataP3K = mysqli_query($this->koneksi,"SELECT * FROM _tb_kotak_p3k");
 
+			$cekJumlah = mysqli_num_rows($dataP3K);
+			
+			return $cekJumlah;
+		}
 
+		//Get ID Kotak Terakhir
+		function getIDKotak(){
+			$dataKotak = mysqli_query($this->koneksi,"SELECT * FROM _tb_kotak_p3k ORDER BY _id_kotak DESC LIMIT 1");
+			$getKotak = mysqli_fetch_assoc($dataKotak);
+			
+			return $getKotak;
+		}
 
+		//List Data Pengguna
+        function listKotakP3K(){
+			
+			$dataKotak = mysqli_query($this->koneksi,"SELECT * FROM _tb_kotak_p3k ORDER BY _id_kotak ASC");
+			while($listKotak = mysqli_fetch_assoc($dataKotak)){
+				$result[] = $listKotak;
+			}
+
+			return $result;
+		}
+
+		//Get Data Kotak
+		function getDataKotak($id){
+			$idFilter = mysqli_real_escape_string($this->koneksi, $id);
+			
+			$dataKotak = mysqli_query($this->koneksi,"SELECT * FROM _tb_kotak_p3k WHERE _id_kotak = '$idFilter'");
+			$getDataKotak = mysqli_fetch_assoc($dataKotak);
+			
+			return $getDataKotak;
+		}
+
+		//Status Isi Kotak P3K
+		function cekIsiKotakP3K($id){
+			$idFilter = mysqli_real_escape_string($this->koneksi, $id);
+
+			$isiKotakP3K = mysqli_query($this->koneksi,"SELECT * FROM _tb_isi_kotak_p3k WHERE _id_kotak = '$idFilter'");
+
+			$cekJumlah = mysqli_num_rows($isiKotakP3K);
+			
+			return $cekJumlah;
+		}
+
+		//List Isi Kotak P3K
+        function listIsiKotakP3K($id){
+			$idFilter = mysqli_real_escape_string($this->koneksi, $id);
+
+			$dataKotak = mysqli_query($this->koneksi,"SELECT * FROM _tb_isi_kotak_p3k WHERE _id_kotak = '$idFilter' ORDER BY _id_kotak ASC");
+			while($listKotak = mysqli_fetch_assoc($dataKotak)){
+				$result[] = $listKotak;
+			}
+
+			return $result;
+		}
+		
+		//Get Data Isi Kotak
+		function getDataIsiKotak($id){
+			$idFilter = mysqli_real_escape_string($this->koneksi, $id);
+			
+			$dataKotak = mysqli_query($this->koneksi,"SELECT * FROM _tb_isi_kotak_p3k, _tb_kotak_p3k WHERE _tb_isi_kotak_p3k._id_kotak = _tb_kotak_p3k._id_kotak AND _tb_isi_kotak_p3k._id_isi_kotak = '$idFilter'");
+			$getDataKotak = mysqli_fetch_assoc($dataKotak);
+			
+			return $getDataKotak;
+		}
 
     }
 
