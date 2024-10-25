@@ -33,8 +33,8 @@
                         <th style="text-align:center;" colspan="5">Pemeriksaan Vital</th>
                         <th style="text-align:center;" colspan="10">Anamnesis/Pemeriksaan Fisik</th>
                         <th style="text-align:center;" rowspan="2">Hasil (Fit/Unfit)</th>
+                        <th rowspan="2">Rekomendasi/Catatan</th>
                         <th rowspan="2">Pemeriksa (Medic)</th>
-                        <th style="text-align:center;" colspan="2" rowspan="2">Aksi</th>
                     
                     </tr>
                             <tr>
@@ -257,6 +257,18 @@
                                     if($getData->cekDCUPekerja($row['_id_pekerja'], $tgl, $bln, $thn) > 0){
                                         $dataDCU = $getData->getDataDCU($row['_id_pekerja'], $tgl, $bln, $thn);
                                         echo $dataDCU['_keterangan'];
+                                                
+                                    }
+                                    else {
+                                        echo "-";
+                                    }
+                                ?>
+                            </td>
+                            <td>
+                                <?php
+                                    if($getData->cekDCUPekerja($row['_id_pekerja'], $tgl, $bln, $thn) > 0){
+                                        $dataDCU = $getData->getDataDCU($row['_id_pekerja'], $tgl, $bln, $thn);
+                                        echo $dataDCU['_catatan'];
                                                 
                                     }
                                     else {
