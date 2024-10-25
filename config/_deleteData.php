@@ -52,6 +52,20 @@
 			mysqli_query($this->koneksi,"DELETE FROM _tb_fungsi WHERE _id_fungsi = '$idFilter'"); 
         }
 
+         //Delete data kotak p3k
+         function hapusKotakP3K($id){
+            $idFilter = mysqli_real_escape_string($this->koneksi, $id);
+            
+			mysqli_query($this->koneksi,"DELETE FROM _tb_kotak_p3k WHERE _id_kotak = '$idFilter'"); 
+        }
+
+        //Delete data kotak p3k
+        function hapusIsiKotakP3K($id){
+            $idFilter = mysqli_real_escape_string($this->koneksi, $id);
+            
+			mysqli_query($this->koneksi,"DELETE FROM _tb_isi_kotak_p3k WHERE _id_isi_kotak = '$idFilter'"); 
+        }
+
     }
 
 ?>
