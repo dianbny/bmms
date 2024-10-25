@@ -15,9 +15,9 @@
         <fieldset>
             <legend> Data Pribadi </legend>
             <label for="name">Nama &nbsp;<span style="color:red;font-size:15px;">*</span></label><br>
-            <input type="text" name="name" placeholder="Isi Nama Pegawai" required><br>
+            <input type="text" name="name" id="name" placeholder="Isi Nama Pegawai" required><br>
 
-            <label for="gender">Jenis Kelamin &nbsp;<span style="color:red;font-size:15px;">*</span></label><br>
+            <label>Jenis Kelamin &nbsp;<span style="color:red;font-size:15px;">*</span></label><br>
             <select name="gender" class="select" required>
                 <option value="" selected>- Pilih Jenis Kelamin -</option>
                 <option value="L">Laki-laki</option>
@@ -25,7 +25,7 @@
             </select>
 
             <label for="placeofbirth">Tempat Lahir &nbsp;<span style="color:red;font-size:15px;">*</span></label><br>
-            <input type="text" name="placeofbirth" placeholder="Isi Tempat Lahir" required><br>
+            <input type="text" name="placeofbirth" id="placeofbirth" placeholder="Isi Tempat Lahir" required><br>
 
             <label for="birtday">Taggal Lahir &nbsp;<span style="color:red;font-size:15px;">*</span></label><br>
             <input type="date" name="birthday" required><br>
