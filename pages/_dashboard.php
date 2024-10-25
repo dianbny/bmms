@@ -22,7 +22,7 @@
         $dataUserLogin = $getData->getDataUserLogin($username);
         $dataUser = $getData->getDataPekerja($dataUserLogin['_id_user']);
         $fungsi = $getData->getNamaFungsi($dataUser['_fungsi']);
-        //$jumTglBln = cal_days_in_month(CAL_GREGORIAN, date('m'), date('Y'));
+        
 
         //Waktu 
         date_default_timezone_set("Asia/Kuala_Lumpur");
@@ -79,17 +79,14 @@
             <div class="menu-third">
                 <a href="persentase-dcu-harian"><i class="fa fa-percent" aria-hidden="true"></i>&nbsp; Harian</a>
                 <a href="persentase-dcu-bulanan"><i class="fa fa-percent" aria-hidden="true"></i>&nbsp; Bulanan</a>
+                <a href="persentase-dcu-high-risk"><i class="fa fa-percent" aria-hidden="true"></i>&nbsp; High Risk</a>
             </div>
         <a href="javascript:void(0)" id="fourth"><i class="fa fa-heartbeat" aria-hidden="true"></i>&nbsp; Medical Checkup</a>
             <div class="menu-fourth">
                 <a href="data-mcu-pekerja"><i class="fa fa-heartbeat" aria-hidden="true"></i>&nbsp; Pegawai</a>
                 <a href="data-mcu-tkjp-mk"><i class="fa fa-heartbeat" aria-hidden="true"></i>&nbsp; TKJP / MK</a>
             </div>
-        <a href="javascript:void(0)" id="fifth"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp; Kotak P3K</a>
-            <div class="menu-fifth">
-                <a href="#"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp; List Kotak P3K</a>
-                <a href="#"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp; Inspeksi Kotak P3K</a>
-            </div>
+        <a href="daftar-kotak-p3k"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp; Kotak P3K</a>
         <?php
             if($dataUserLogin['_level_user'] == "Admin"){ ?>
                 <a href="daftar-pengguna"><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp; Daftar Pengguna</a>
@@ -99,6 +96,7 @@
             <div class="menu-sixth">
                 <a href="rekap-data-checkup-harian"><i class="fa fa-file-excel-o" aria-hidden="true"></i>&nbsp; Rekap Harian</a>
                 <a href="rekap-data-checkup"><i class="fa fa-file-excel-o" aria-hidden="true"></i>&nbsp; Rekap Bulanan</a>
+                <a href="high-risk-checkup"><i class="fa fa-file-excel-o" aria-hidden="true"></i>&nbsp; High Risk</a>
             </div>
         <a href="javascript:void(0)" id="seventh"><i class="fa fa-cogs" aria-hidden="true"></i>&nbsp; Pengaturan</a>
             <div class="menu-seventh">
@@ -169,6 +167,12 @@
 
                     include "_edit_data_dcu.php";
         
+                    break;
+
+                case "high-risk-checkup":
+
+                    include "_data_hr_dcu.php";
+    
                     break;
 
                 case "daftar-visitor":
@@ -296,6 +300,12 @@
         
                     break;
 
+                case "persentase-dcu-high-risk":
+
+                    include "_persentase_dcu_high_risk.php";
+            
+                    break;
+
                 case "pencarian-data-checkup":
 
                     include "_pencarian_data_dcu.php";
@@ -344,19 +354,55 @@
                     
                     break;
 
-                case "dashboard" : 
+                case "daftar-kotak-p3k":
 
+                    include "_kotak_p3k.php";
+                        
+                    break;
+
+                case "tambah-data-kotak-p3k":
+
+                    include "_tambah_kotak_p3k.php";
+                            
+                    break;
+
+                case "edit-data-kotak":
+
+                    include "_edit_kotak_p3k.php";
+                                
+                    break;
+
+                case "detail-data-kotak":
+
+                    include "_detail_kotak_p3k.php";
+                                    
+                    break;
+
+                case "tambah-data-isi-kotak-p3k":
+
+                    include "_tambah_isi_kotak_p3k.php";
+                                
+                    break;
+
+                case "edit-data-isi-kotak-p3k":
+
+                    include "_edit_isi_kotak_p3k.php";
+                                    
+                    break;
+
+                case "dashboard" : 
+                    $jumTglBln = cal_days_in_month(CAL_GREGORIAN, date('m'), date('Y'));
                     foreach($getData->listFungsi() as $row){
                         $namaFungsi[] = substr($row['_nama_fungsi'], 0, 4);
 
-                        $totalMasuk = $getData->getNamaFungsi($row['_id_fungsi']);
+                        //$totalMasuk = $getData->getNamaFungsi($row['_id_fungsi']);
                         //$totalMasukBulan = $totalMasuk['_total_masuk_tkjp'] * $jumTglBln;
             
                         $dcuPekerjaDay = $getData->jumlahDCUFungsiDay(date('Y-m-d'), $row['_id_fungsi'], "PEKERJA");
                         $dcuTKJPDay = $getData->jumlahDCUFungsiDay(date('Y-m-d'), $row['_id_fungsi'], "TKJP/MK");
             
-                        $jumlahDCUDayPeg[] = ($dcuPekerjaDay != 0) ? ceil($dcuPekerjaDay / $totalMasuk['_total_masuk_pekerja'] *100) : 0;
-                        $jumlahDCUDay[] = ($dcuTKJPDay != 0) ? ceil($dcuTKJPDay / $totalMasuk['_total_masuk_tkjp'] *100) : 0;
+                        $jumlahDCUDayPeg[] = ($dcuPekerjaDay != 0) ? ceil($dcuPekerjaDay / $row['_total_masuk_pekerja'] *100) : 0;
+                        $jumlahDCUDay[] = ($dcuTKJPDay != 0) ? ceil($dcuTKJPDay / $row['_total_masuk_tkjp'] *100) : 0;
                         
                         //$jumlahDCUMonth[] = ceil($getData->jumlahDCUFungsiMonth(date('m'), $row['_id_fungsi'])/$totalMasukBulan*100);
             
@@ -366,11 +412,13 @@
                         $kategori[] = $row['_kategori'];
 
                         $totalPekerjaHR[] = $getData->cekTotalKategoriPekerjaan($row['_id_kategori']);
+                        $totalMasukHRBulan = $getData->cekTotalKategoriPekerjaan($row['_id_kategori']) * $jumTglBln;
 
                         $dcuHRDay = $getData->jumlahDCUHRDay(date('Y-m-d'), $row['_id_kategori']);
+                        $dcuHRMonth = $getData->jumlahDCUHRMonth(date('m'), date('Y'), $row['_id_kategori']);
 
                         $jumlahDCUHRDay[] = ($dcuHRDay != 0) ? ceil($dcuHRDay / $getData->cekTotalKategoriPekerjaan($row['_id_kategori']) * 100) : 0;
-                        
+                        $jumlahDCUHRMonth[] = ($dcuHRMonth != 0) ? ceil($dcuHRMonth / $totalMasukHRBulan * 100) : 0;
 
                     } ?>
 
@@ -527,7 +575,7 @@
 
             </div>
             <div class="dashboard-bottom">
-                <span class="color6">Grafik Checkup Harian</span>
+                <span class="color6">Grafik Checkup Bulanan</span>
                 <div class="table-dashboard">
                     <canvas id="chartHRMonth" style="width:100%;height:100%;"></canvas>
                 </div>
@@ -614,7 +662,7 @@
 
     <!-- Footer Halaman -->
     <div class="footer">
-        Bunyu Medical Management System | Ver. 1.3
+        Bunyu Medical Management System | Ver. 1.4
     </div>
     <!-- Akhir Footer -->
 
