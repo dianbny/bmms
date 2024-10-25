@@ -244,5 +244,53 @@ $(document).ready(function(){
         });
     });
 
+    //Konfirmasi Delete Kotak P3K
+    $('.konfirmDeleteKotakP3K').click(function(){
+        var id = $(this).attr("data-id");
+        swal({
+            title: "Konfirmasi",
+            text: "Apakah anda yakin ingin menghapus data tersebut ?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonClass: "btn-danger",
+            confirmButtonText: "Hapus",
+            cancelButtonText: "Keluar",
+            closeOnConfirm: false,
+            closeOnCancel: false
+            },
+            function(isConfirm){
+                if (isConfirm) {
+                    window.location.href = "hapus-data-kotak-p3k-"+id;
+                }
+                else {
+                    window.location.href = "";
+                }
+        });
+    });
+
+    //Konfirmasi Delete Isi Kotak P3K
+    $('.konfirmDeleteIsiKotakP3K').click(function(){
+        var id = $(this).attr("data-id");
+        swal({
+            title: "Konfirmasi",
+            text: "Apakah anda yakin ingin menghapus data tersebut ?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonClass: "btn-danger",
+            confirmButtonText: "Hapus",
+            cancelButtonText: "Keluar",
+            closeOnConfirm: false,
+            closeOnCancel: false
+            },
+            function(isConfirm){
+                if (isConfirm) {
+                    window.location.href = "hapus-data-isi-kotak-p3k-"+id;
+                }
+                else {
+                    window.location.href = "";
+                }
+        });
+    });
+
 
 });
