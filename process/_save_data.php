@@ -701,6 +701,22 @@
                             }); }, 500);
                     </script>
           <?php }
+                elseif(!preg_match("/^[a-zA-Z ,-]*$/", $_POST['catatan'])){ ?>
+                    <script>
+                        setTimeout(function() { 
+                            swal({
+                                title: "Terjadi Kesalahan !",
+                                text: "Catatan tidak boleh mengandung karakter khusus !",
+                                type: "error",
+                                confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "edit-data-checkup-<?= $id; ?>";
+                                        }
+                            }); }, 500);
+                    </script>
+          <?php }
                 else {
                     if($getData->cekDCUPekerja($id, date('d'), date('m'), date('Y')) < 1){
                         $tgl = date('Y-m-d');
@@ -711,15 +727,16 @@
                         $suhu = $_POST['suhutubuh'];
                         $nafas = $_POST['frekuensinafas'];
                         $riwayat = $_POST['riwayatpenyakit'];
-                        $detailriwayat = ($_POST['detailriwayat'] == "") ? "-" : $_POST['detailriwayat'];
+                        $detailriwayat = ($_POST['detailriwayat'] == "") ? "-" : trim($_POST['detailriwayat']);
                         $konsumsiobat = $_POST['konsumsiobat'];
-                        $tujuanobat = ($_POST['tujuanobat'] == "") ? "-" : $_POST['tujuanobat'];
+                        $tujuanobat = ($_POST['tujuanobat'] == "") ? "-" : trim($_POST['tujuanobat']);
                         $keluhan = $_POST['keluhan'];
-                        $detailkeluhan = ($_POST['detailkeluhan'] == "") ? "-" : $_POST['detailkeluhan'];
+                        $detailkeluhan = ($_POST['detailkeluhan'] == "") ? "-" : trim($_POST['detailkeluhan']);
                         $kesadaran = $_POST['tingkatkesadaran'];
                         $mata = $_POST['cekmata'];
                         $romberg = $_POST['romberg'];
                         $napza = $_POST['drugs'];
+                        $catatan = ($_POST['catatan'] == "") ? "-" : trim($_POST['catatan']);
                         $ket;
 
                         if($riwayat == "Ada" || $konsumsiobat == "Ada" || $keluhan == "Ada"){
@@ -782,7 +799,7 @@
                             }
                         }
 
-                        $saveData->simpanCheckup($id, $tgl, $waktu, $sistol, $diastol, $denyut, $suhu, $nafas, $riwayat, ucwords($detailriwayat), $konsumsiobat, ucwords($tujuanobat), $keluhan, ucwords($detailkeluhan), $kesadaran, $mata, $romberg, $napza, $ket, $dataUserLogin['_id_user']); ?>
+                        $saveData->simpanCheckup($id, $tgl, $waktu, $sistol, $diastol, $denyut, $suhu, $nafas, $riwayat, ucwords($detailriwayat), $konsumsiobat, ucwords($tujuanobat), $keluhan, ucwords($detailkeluhan), $kesadaran, $mata, $romberg, $napza, $ket, ucwords($catatan), $dataUserLogin['_id_user']); ?>
                             <script>
                                 setTimeout(function() { 
                                     swal({
@@ -1059,6 +1076,22 @@
                             }); }, 500);
                     </script>
           <?php }
+                elseif(!preg_match("/^[a-zA-Z ,-]*$/", $_POST['catatan'])){ ?>
+                    <script>
+                        setTimeout(function() { 
+                            swal({
+                                title: "Terjadi Kesalahan !",
+                                text: "Catatan tidak boleh mengandung karakter khusus !",
+                                type: "error",
+                                confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "edit-data-checkup-<?= $id; ?>";
+                                        }
+                            }); }, 500);
+                    </script>
+          <?php }
                 else {
                     $tgl = date('Y-m-d');
                     $waktu = date('H:i:s');
@@ -1068,15 +1101,16 @@
                     $suhu = $_POST['suhutubuh'];
                     $nafas = $_POST['frekuensinafas'];
                     $riwayat = $_POST['riwayatpenyakit'];
-                    $detailriwayat = ($_POST['detailriwayat'] == "") ? "-" : $_POST['detailriwayat'];
+                    $detailriwayat = ($_POST['detailriwayat'] == "") ? "-" : trim($_POST['detailriwayat']);
                     $konsumsiobat = $_POST['konsumsiobat'];
-                    $tujuanobat = ($_POST['tujuanobat'] == "") ? "-" : $_POST['tujuanobat'];
+                    $tujuanobat = ($_POST['tujuanobat'] == "") ? "-" : trim($_POST['tujuanobat']);
                     $keluhan = $_POST['keluhan'];
-                    $detailkeluhan = ($_POST['detailkeluhan'] == "") ? "-" : $_POST['detailkeluhan'];
+                    $detailkeluhan = ($_POST['detailkeluhan'] == "") ? "-" : trim($_POST['detailkeluhan']);
                     $kesadaran = $_POST['tingkatkesadaran'];
                     $mata = $_POST['cekmata'];
                     $romberg = $_POST['romberg'];
                     $napza = $_POST['drugs'];
+                    $catatan = ($_POST['catatan'] == "") ? "-" : trim($_POST['catatan']);
                     $ket;
 
                     if($riwayat == "Ada" || $konsumsiobat == "Ada" || $keluhan == "Ada"){
@@ -1145,7 +1179,7 @@
                         }
                     }
 
-                    $saveData->updateCheckup($id, $tgl, $waktu, $sistol, $diastol, $denyut, $suhu, $nafas, $riwayat, ucwords($detailriwayat), $konsumsiobat, ucwords($tujuanobat), $keluhan, ucwords($detailkeluhan), $kesadaran, $mata, $romberg, $napza, $ket, $dataUserLogin['_id_user']); ?>
+                    $saveData->updateCheckup($id, $tgl, $waktu, $sistol, $diastol, $denyut, $suhu, $nafas, $riwayat, ucwords($detailriwayat), $konsumsiobat, ucwords($tujuanobat), $keluhan, ucwords($detailkeluhan), $kesadaran, $mata, $romberg, $napza, $ket, ucwords($catatan), $dataUserLogin['_id_user']); ?>
                         <script>
                             setTimeout(function() { 
                                 swal({
@@ -1175,6 +1209,8 @@
           <?php }
             } 
         }
+
+        //Simpan Visitor
         elseif($_GET['action'] == "simpan-visitor"){
             if(isset($_POST['save'])){
                 if(!preg_match("/^[0-9]*$/", $_POST['id'])){ ?>
@@ -1314,6 +1350,8 @@
           <?php }
             }
         }
+
+        //Simpan Update Visitor
         elseif($_GET['action'] == "simpan-update-visitor"){
             if(isset($_POST['save'])){
                 $id = $_GET['id'];
@@ -1418,6 +1456,8 @@
           <?php }
             }
         }
+
+        //Simpan Checkup Visitor
         elseif($_GET['action'] == "simpan-checkup-visitor"){
             if(isset($_POST['save'])){
                 $id = $_GET['id'];
@@ -1534,6 +1574,8 @@
           <?php }
             }
         }
+
+        //Simpan Update Checkup Visitor
         elseif($_GET['action'] == "simpan-update-checkup-visitor"){
             if(isset($_POST['save'])){
                 $id = $_GET['id'];
@@ -1648,6 +1690,8 @@
           <?php }
             }
         }
+
+        //Simpan Pengguna
         elseif($_GET['action'] == "simpan-pengguna"){
             if(isset($_POST['save'])){
                 if(!preg_match("/^[0-9A-Z-]*$/", $_POST['id'])){ ?>
@@ -1772,6 +1816,8 @@
           <?php }
             }
         }
+
+        //Simpan Update Pengguna
         elseif($_GET['action'] == "simpan-update-pengguna"){
             $id = $_GET['id'];
             if(isset($_POST['save'])){
@@ -1830,6 +1876,8 @@
           <?php }
             }
         }
+
+        //Simpan Perusahaan
         elseif($_GET['action'] == "simpan-perusahaan"){
             if(isset($_POST['save'])){
                 if(!preg_match("/^[A-Z0-9-]*$/", $_POST['id_p'])){ ?>
@@ -1900,6 +1948,8 @@
           <?php }
             }
         }
+
+        //Simpan Update Perusahaan
         elseif($_GET['action'] == "simpan-update-perusahaan"){
             $id = $_GET['id'];
             if(isset($_POST['save'])){
@@ -1970,6 +2020,8 @@
           <?php }
             }
         }
+
+        //Simpan Fungsi
         elseif($_GET['action'] == "simpan-fungsi"){
             if(isset($_POST['save'])){
                 if(!preg_match("/^[A-Z0-9-]*$/", $_POST['id_f'])){ ?>
@@ -2040,6 +2092,8 @@
           <?php }
             }
         }
+
+        //Simpan Update Fungsi
         elseif($_GET['action'] == "simpan-update-fungsi"){
             $id = $_GET['id'];
             if(isset($_POST['save'])){
@@ -2146,6 +2200,8 @@
           <?php }
             }
         }
+
+        //Simpan Medical Checkup
         elseif($_GET['action'] == "simpan-medical-checkup"){
             if(isset($_POST['save'])){
                 $id = $_GET['id'];
@@ -2226,6 +2282,500 @@
             }
             
         }
+
+        //Simpan Kotak P3K
+        elseif($_GET['action'] == "simpan-kotak-p3k"){
+            if(isset($_POST['save'])){
+                if(!preg_match("/^[A-Z0-9-]*$/", $_POST['id_k'])){ ?>
+                    <script>
+                        setTimeout(function() { 
+                            swal({
+                                title: "Terjadi Kesalahan !",
+                                text: "ID Kotak P3K tidak boleh mengandung karakter khusus !",
+                                type: "error",
+                                confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "tambah-data-kotak-p3k";
+                                        }
+                            }); }, 500);
+                    </script>
+          <?php }
+                elseif(!preg_match("/^[A-Za-z0-9- &]*$/", $_POST['lokasi_k'])){ ?>
+                    <script>
+                        setTimeout(function() { 
+                            swal({
+                                title: "Terjadi Kesalahan !",
+                                text: "Lokasi Kotak P3K tidak boleh mengandung karakter khusus !",
+                                type: "error",
+                                confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "tambah-data-kotak-p3k";
+                                        }
+                            }); }, 500);
+                    </script>
+          <?php }
+                elseif(!preg_match("/^[0-9]*$/", $_POST['nomor_k'])){ ?>
+                    <script>
+                        setTimeout(function() { 
+                            swal({
+                                title: "Terjadi Kesalahan !",
+                                text: "Nomor Kotak P3K hanya boleh mengandung angka !",
+                                type: "error",
+                                confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "tambah-data-kotak-p3k";
+                                        }
+                            }); }, 500);
+                    </script>
+          <?php }
+                elseif(!preg_match("/^[A-Za-z ]*$/", $_POST['tipe'])){ ?>
+                    <script>
+                        setTimeout(function() { 
+                            swal({
+                                title: "Terjadi Kesalahan !",
+                                text: "Tipe Kotak P3K tidak boleh mengandung karakter khusus !",
+                                type: "error",
+                                confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "tambah-data-kotak-p3k";
+                                        }
+                            }); }, 500);
+                    </script>
+          <?php }
+                else {
+                    $id = $_POST['id_k'];
+                    $lokasi = trim($_POST['lokasi_k']);
+                    $nomor = $_POST['nomor_k'];
+                    $tipe = $_POST['tipe'];
+
+                    $saveData->simpanKotakP3K($id, strtoupper($lokasi), $nomor, $tipe); ?>
+                    
+                        <script>
+                            setTimeout(function() { 
+                                swal({
+                                    title: "Informasi",
+                                    text: "Data Kotak P3K berhasil tersimpan",
+                                    type: "success",
+                                    confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "daftar-kotak-p3k";
+                                        }
+                            }); }, 500);
+                        </script>
+          <?php }
+            }
+            else {
+                if(isset($_SESSION['status'])){ ?>
+                    <script>    
+                        window.location.href = "dashboard";
+                    </script>
+            <?php }
+                else { ?>
+                    <script>    
+                        window.location.href = "logout";
+                    </script>
+          <?php }
+            }
+        }
+
+        //Simpan Update Kotak P3K
+        elseif($_GET['action'] == "simpan-update-kotak-p3k"){
+            $id = $_GET['id'];
+            if(isset($_POST['save'])){
+                if(!preg_match("/^[A-Z0-9-]*$/", $_POST['id_k'])){ ?>
+                    <script>
+                        setTimeout(function() { 
+                            swal({
+                                title: "Terjadi Kesalahan !",
+                                text: "ID Kotak P3K tidak boleh mengandung karakter khusus !",
+                                type: "error",
+                                confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "edit-data-kotak-<?= $id; ?>";
+                                        }
+                            }); }, 500);
+                    </script>
+          <?php }
+                elseif(!preg_match("/^[A-Za-z0-9- &]*$/", $_POST['lokasi_k'])){ ?>
+                    <script>
+                        setTimeout(function() { 
+                            swal({
+                                title: "Terjadi Kesalahan !",
+                                text: "Lokasi Kotak P3K tidak boleh mengandung karakter khusus !",
+                                type: "error",
+                                confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "edit-data-kotak-<?= $id; ?>";
+                                        }
+                            }); }, 500);
+                    </script>
+          <?php }
+                elseif(!preg_match("/^[0-9]*$/", $_POST['nomor_k'])){ ?>
+                    <script>
+                        setTimeout(function() { 
+                            swal({
+                                title: "Terjadi Kesalahan !",
+                                text: "Nomor Kotak P3K hanya boleh mengandung angka !",
+                                type: "error",
+                                confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "edit-data-kotak-<?= $id; ?>";
+                                        }
+                            }); }, 500);
+                    </script>
+          <?php }
+                elseif(!preg_match("/^[A-Za-z ]*$/", $_POST['tipe'])){ ?>
+                    <script>
+                        setTimeout(function() { 
+                            swal({
+                                title: "Terjadi Kesalahan !",
+                                text: "Tipe Kotak P3K tidak boleh mengandung karakter khusus !",
+                                type: "error",
+                                confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "edit-data-kotak-<?= $id; ?>";
+                                        }
+                            }); }, 500);
+                    </script>
+          <?php }
+                else {
+                    $lokasi = trim($_POST['lokasi_k']);
+                    $nomor = $_POST['nomor_k'];
+                    $tipe = $_POST['tipe'];
+
+                    $saveData->updateKotakP3K($id, strtoupper($lokasi), $nomor, $tipe); ?>
+                    
+                        <script>
+                            setTimeout(function() { 
+                                swal({
+                                    title: "Informasi",
+                                    text: "Data Kotak P3K berhasil diperbarui",
+                                    type: "success",
+                                    confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "daftar-kotak-p3k";
+                                        }
+                            }); }, 500);
+                        </script>
+          <?php }
+            }
+            else {
+                if(isset($_SESSION['status'])){ ?>
+                    <script>    
+                        window.location.href = "dashboard";
+                    </script>
+            <?php }
+                else { ?>
+                    <script>    
+                        window.location.href = "logout";
+                    </script>
+          <?php }
+            }
+        }
+
+        //Simpan Isi Kotak P3K
+        elseif($_GET['action'] == "simpan-isi-kotak-p3k"){
+            $id = $_GET['id'];
+            if(isset($_POST['save'])){
+                if(!preg_match("/^[A-Za-z0-9- &()]*$/", $_POST['nama'])){ ?>
+                    <script>
+                        setTimeout(function() { 
+                            swal({
+                                title: "Terjadi Kesalahan !",
+                                text: "Nama tidak boleh mengandung karakter khusus !",
+                                type: "error",
+                                confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "tambah-data-isi-kotak-p3k-<?= $id; ?>";
+                                        }
+                            }); }, 500);
+                    </script>
+          <?php }
+                elseif(!preg_match("/^[0-9\/-]*$/", $_POST['expired'])){ ?>
+                    <script>
+                        setTimeout(function() { 
+                            swal({
+                                title: "Terjadi Kesalahan !",
+                                text: "Axpired hanya boleh berupa angka dalam format tanggal !",
+                                type: "error",
+                                confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "tambah-data-isi-kotak-p3k-<?= $id; ?>";
+                                        }
+                            }); }, 500);
+                    </script>
+          <?php }
+                elseif(!preg_match("/^[A-Za-z ]*$/", $_POST['status'])){ ?>
+                    <script>
+                        setTimeout(function() { 
+                            swal({
+                                title: "Terjadi Kesalahan !",
+                                text: "Status ketersediaan tidak boleh mengandung karakter khusus !",
+                                type: "error",
+                                confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "tambah-data-isi-kotak-p3k-<?= $id; ?>";
+                                        }
+                            }); }, 500);
+                    </script>
+          <?php }
+                elseif(!preg_match("/^[0-9]*$/", $_POST['jumlah'])){ ?>
+                    <script>
+                        setTimeout(function() { 
+                            swal({
+                                title: "Terjadi Kesalahan !",
+                                text: "Jumlah hanya boleh berupa angka !",
+                                type: "error",
+                                confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "tambah-data-isi-kotak-p3k-<?= $id; ?>";
+                                        }
+                            }); }, 500);
+                    </script>
+          <?php }
+                elseif(!preg_match("/^[0-9\/-]*$/", $_POST['pemeriksaan_t'])){ ?>
+                    <script>
+                        setTimeout(function() { 
+                            swal({
+                                title: "Terjadi Kesalahan !",
+                                text: "Pemeriksaan terakhir hanya boleh berupa angka dalam format tanggal !",
+                                type: "error",
+                                confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "tambah-data-isi-kotak-p3k-<?= $id; ?>";
+                                        }
+                            }); }, 500);
+                    </script>
+          <?php }
+                elseif(!preg_match("/^[A-Za-z0-9 &()]*$/", $_POST['keterangan'])){ ?>
+                    <script>
+                        setTimeout(function() { 
+                            swal({
+                                title: "Terjadi Kesalahan !",
+                                text: "Jumlah hanya boleh berupa angka !",
+                                type: "error",
+                                confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "tambah-data-isi-kotak-p3k-<?= $id; ?>";
+                                        }
+                            }); }, 500);
+                    </script>
+          <?php }
+                else {
+                    $nama = trim($_POST['nama']);
+                    $exp = $_POST['expired'];
+                    $status = $_POST['status'];
+                    $jumlah = $_POST['jumlah'];
+                    $pemeriksaan = $_POST['pemeriksaan_t'];
+                    $ket = trim($_POST['keterangan']);
+
+                    $saveData->simpanIsiKotakP3K($id, ucwords($nama), $exp, $status, $jumlah, $pemeriksaan, $dataUserLogin['_id_user'], ucwords($ket)); ?>
+                    
+                        <script>
+                            setTimeout(function() { 
+                                swal({
+                                    title: "Informasi",
+                                    text: "Data Isi Kotak P3K berhasil diperbarui",
+                                    type: "success",
+                                    confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "detail-data-kotak-<?= $id; ?>";
+                                        }
+                            }); }, 500);
+                        </script>
+          <?php }
+            }
+            else {
+                if(isset($_SESSION['status'])){ ?>
+                    <script>    
+                        window.location.href = "dashboard";
+                    </script>
+            <?php }
+                else { ?>
+                    <script>    
+                        window.location.href = "logout";
+                    </script>
+          <?php }
+            }
+        }
+
+        //Simpan Isi Kotak P3K
+        elseif($_GET['action'] == "simpan-update-isi-kotak-p3k"){
+            $id = $_GET['id'];
+            $dataKotak = $getData->getDataIsiKotak($id);
+            if(isset($_POST['save'])){
+                if(!preg_match("/^[A-Za-z0-9- &()]*$/", $_POST['nama'])){ ?>
+                    <script>
+                        setTimeout(function() { 
+                            swal({
+                                title: "Terjadi Kesalahan !",
+                                text: "Nama tidak boleh mengandung karakter khusus !",
+                                type: "error",
+                                confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "edit-data-isi-kotak-p3k-<?= $id; ?>";
+                                        }
+                            }); }, 500);
+                    </script>
+          <?php }
+                elseif(!preg_match("/^[0-9\/-]*$/", $_POST['expired'])){ ?>
+                    <script>
+                        setTimeout(function() { 
+                            swal({
+                                title: "Terjadi Kesalahan !",
+                                text: "Axpired hanya boleh berupa angka dalam format tanggal !",
+                                type: "error",
+                                confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "edit-data-isi-kotak-p3k-<?= $id; ?>";
+                                        }
+                            }); }, 500);
+                    </script>
+          <?php }
+                elseif(!preg_match("/^[A-Za-z ]*$/", $_POST['status'])){ ?>
+                    <script>
+                        setTimeout(function() { 
+                            swal({
+                                title: "Terjadi Kesalahan !",
+                                text: "Status ketersediaan tidak boleh mengandung karakter khusus !",
+                                type: "error",
+                                confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "edit-data-isi-kotak-p3k-<?= $id; ?>";
+                                        }
+                            }); }, 500);
+                    </script>
+          <?php }
+                elseif(!preg_match("/^[0-9]*$/", $_POST['jumlah'])){ ?>
+                    <script>
+                        setTimeout(function() { 
+                            swal({
+                                title: "Terjadi Kesalahan !",
+                                text: "Jumlah hanya boleh berupa angka !",
+                                type: "error",
+                                confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "edit-data-isi-kotak-p3k-<?= $id; ?>";
+                                        }
+                            }); }, 500);
+                    </script>
+          <?php }
+                elseif(!preg_match("/^[0-9\/-]*$/", $_POST['pemeriksaan_t'])){ ?>
+                    <script>
+                        setTimeout(function() { 
+                            swal({
+                                title: "Terjadi Kesalahan !",
+                                text: "Pemeriksaan terakhir hanya boleh berupa angka dalam format tanggal !",
+                                type: "error",
+                                confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "edit-data-isi-kotak-p3k-<?= $id; ?>";
+                                        }
+                            }); }, 500);
+                    </script>
+          <?php }
+                elseif(!preg_match("/^[A-Za-z0-9 &()]*$/", $_POST['keterangan'])){ ?>
+                    <script>
+                        setTimeout(function() { 
+                            swal({
+                                title: "Terjadi Kesalahan !",
+                                text: "Jumlah hanya boleh berupa angka !",
+                                type: "error",
+                                confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "edit-data-isi-kotak-p3k-<?= $id; ?>";
+                                        }
+                            }); }, 500);
+                    </script>
+          <?php }
+                else {
+                    $nama = trim($_POST['nama']);
+                    $exp = $_POST['expired'];
+                    $status = $_POST['status'];
+                    $jumlah = $_POST['jumlah'];
+                    $pemeriksaan = $_POST['pemeriksaan_t'];
+                    $ket = trim($_POST['keterangan']);
+
+                    $saveData->updateIsiKotakP3K($id, ucwords($nama), $exp, $status, $jumlah, $pemeriksaan, $dataUserLogin['_id_user'], ucwords($ket)); ?>
+                    
+                        <script>
+                            setTimeout(function() { 
+                                swal({
+                                    title: "Informasi",
+                                    text: "Data Isi Kotak P3K berhasil diperbarui",
+                                    type: "success",
+                                    confirmButtonText: "OK"
+                                },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = "detail-data-kotak-<?= $dataKotak['_id_kotak']; ?>";
+                                        }
+                            }); }, 500);
+                        </script>
+          <?php }
+            }
+            else {
+                if(isset($_SESSION['status'])){ ?>
+                    <script>    
+                        window.location.href = "dashboard";
+                    </script>
+            <?php }
+                else { ?>
+                    <script>    
+                        window.location.href = "logout";
+                    </script>
+          <?php }
+            }
+        }
+
+
+
     ?>
     <!-- Script Javascript -->
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
