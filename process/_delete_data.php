@@ -22,7 +22,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="assets/images/pertamina.png" type="image/gif">
     <link rel="stylesheet" type="text/css" href="assets/css/_style_page.css">
-    <title>Save Data</title>
+    <title>Delete Data</title>
 
     <!-- Sweet Alert -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
@@ -169,6 +169,46 @@
                             function(isConfirm){
                                 if (isConfirm) {
                                     window.location.href="daftar-fungsi";
+                                }
+                    }); }, 500);
+                </script>
+  <?php }
+        elseif($_GET['action'] == "hapus-data-kotak-p3k"){
+            $id = $_GET['id'];
+
+            $deleteData->hapusKotakP3K($id); ?>
+
+                <script>
+                    setTimeout(function() { 
+                        swal({
+                                title: "Informasi",
+                                text: "Data berhasil terhapus",
+                                type: "success",
+                                confirmButtonText: "OK"
+                            },
+                            function(isConfirm){
+                                if (isConfirm) {
+                                    window.location.href="daftar-kotak-p3k";
+                                }
+                    }); }, 500);
+                </script>
+  <?php }
+        elseif($_GET['action'] == "hapus-data-isi-kotak-p3k"){
+            $id = $_GET['id'];
+            $dataKotak = $getData->getDataIsiKotak($id);
+            $deleteData->hapusIsiKotakP3K($id); ?>
+
+                <script>
+                    setTimeout(function() { 
+                        swal({
+                                title: "Informasi",
+                                text: "Data berhasil terhapus",
+                                type: "success",
+                                confirmButtonText: "OK"
+                            },
+                            function(isConfirm){
+                                if (isConfirm) {
+                                    window.location.href="detail-data-kotak-<?= $dataKotak['_id_kotak']; ?>";
                                 }
                     }); }, 500);
                 </script>
