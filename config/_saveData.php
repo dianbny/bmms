@@ -36,7 +36,7 @@
 		}
 
 		//Simpan Hasil Checkup
-		function simpanCheckup($id, $tgl, $waktu, $sistol, $diastol, $denyutnadi, $suhutubuh, $frekuensinafas, $riwayat, $detailriwayat, $konsumsiobat, $tujuanobat, $statuskeluhan, $keluhan, $tingkatkesadaran, $pemeriksaanmata, $keseimbangan, $pengaruhalkohol, $keterangan, $medic){
+		function simpanCheckup($id, $tgl, $waktu, $sistol, $diastol, $denyutnadi, $suhutubuh, $frekuensinafas, $riwayat, $detailriwayat, $konsumsiobat, $tujuanobat, $statuskeluhan, $keluhan, $tingkatkesadaran, $pemeriksaanmata, $keseimbangan, $pengaruhalkohol, $keterangan, $catatan, $medic){
 			$idFilter = mysqli_real_escape_string($this->koneksi, $id);
 			$tglFilter = mysqli_real_escape_string($this->koneksi, $tgl);
 			$waktuFilter = mysqli_real_escape_string($this->koneksi, $waktu);
@@ -56,13 +56,14 @@
 			$keseimbanganFilter = mysqli_real_escape_string($this->koneksi, $keseimbangan);
 			$pengaruhalkoholFilter = mysqli_real_escape_string($this->koneksi, $pengaruhalkohol);
 			$keteranganFilter = mysqli_real_escape_string($this->koneksi, $keterangan);
+			$catatanFilter = mysqli_real_escape_string($this->koneksi, $catatan);
 			$medicFilter = mysqli_real_escape_string($this->koneksi, $medic);
 
-			mysqli_query($this->koneksi,"INSERT INTO _tb_daily_checkup VALUES ('$idFilter','$tglFilter','$waktuFilter','$sistolFilter','$diastolFilter','$denyutnadiFilter','$suhutubuhFilter','$frekuensinafasFilter','$riwayatFilter','$detailriwayatFilter','$konsumsiobatFilter','$tujuanobatFilter','$statuskeluhanFilter','$keluhanFilter','$tingkatkesadaranFilter','$pemeriksaanmataFilter','$keseimbanganFilter','$pengaruhalkoholFilter','$keteranganFilter','$medicFilter')");
+			mysqli_query($this->koneksi,"INSERT INTO _tb_daily_checkup VALUES ('$idFilter','$tglFilter','$waktuFilter','$sistolFilter','$diastolFilter','$denyutnadiFilter','$suhutubuhFilter','$frekuensinafasFilter','$riwayatFilter','$detailriwayatFilter','$konsumsiobatFilter','$tujuanobatFilter','$statuskeluhanFilter','$keluhanFilter','$tingkatkesadaranFilter','$pemeriksaanmataFilter','$keseimbanganFilter','$pengaruhalkoholFilter','$keteranganFilter','$catatanFilter','$medicFilter')");
 		}
 
 		//Update Hasil Checkup
-		function updateCheckup($id, $tgl, $waktu, $sistol, $diastol, $denyutnadi, $suhutubuh, $frekuensinafas, $riwayat, $detailriwayat, $konsumsiobat, $tujuanobat, $statuskeluhan, $keluhan, $tingkatkesadaran, $pemeriksaanmata, $keseimbangan, $pengaruhalkohol, $keterangan, $medic){
+		function updateCheckup($id, $tgl, $waktu, $sistol, $diastol, $denyutnadi, $suhutubuh, $frekuensinafas, $riwayat, $detailriwayat, $konsumsiobat, $tujuanobat, $statuskeluhan, $keluhan, $tingkatkesadaran, $pemeriksaanmata, $keseimbangan, $pengaruhalkohol, $keterangan, $catatan, $medic){
 			$idFilter = mysqli_real_escape_string($this->koneksi, $id);
 			$tglFilter = mysqli_real_escape_string($this->koneksi, $tgl);
 			$waktuFilter = mysqli_real_escape_string($this->koneksi, $waktu);
@@ -82,9 +83,10 @@
 			$keseimbanganFilter = mysqli_real_escape_string($this->koneksi, $keseimbangan);
 			$pengaruhalkoholFilter = mysqli_real_escape_string($this->koneksi, $pengaruhalkohol);
 			$keteranganFilter = mysqli_real_escape_string($this->koneksi, $keterangan);
+			$catatanFilter = mysqli_real_escape_string($this->koneksi, $catatan);
 			$medicFilter = mysqli_real_escape_string($this->koneksi, $medic);
 			
-			mysqli_query($this->koneksi,"UPDATE _tb_daily_checkup SET _waktu = '$waktuFilter', _sistolik = '$sistolFilter', _diastolik = '$diastolFilter', _denyut_nadi = '$denyutnadiFilter', _suhu_tubuh = '$suhutubuhFilter', _frekuensi_nafas = '$frekuensinafasFilter', _riwayat_penyakit = '$riwayatFilter', _detail_riwayat = '$detailriwayatFilter', _konsumsi_obat = '$konsumsiobatFilter', _tujuan_obat = '$tujuanobatFilter', _status_keluhan = '$statuskeluhanFilter', _keluhan = '$keluhanFilter', _tingkat_kesadaran = '$tingkatkesadaranFilter', _pemeriksaan_mata = '$pemeriksaanmataFilter', _pemeriksaan_keseimbangan = '$keseimbanganFilter', _pengaruh_alkohol = '$pengaruhalkoholFilter', _keterangan = '$keteranganFilter', _medic = '$medicFilter' WHERE _id_pekerja = '$idFilter' AND _tgl_dcu = '$tglFilter'");
+			mysqli_query($this->koneksi,"UPDATE _tb_daily_checkup SET _waktu = '$waktuFilter', _sistolik = '$sistolFilter', _diastolik = '$diastolFilter', _denyut_nadi = '$denyutnadiFilter', _suhu_tubuh = '$suhutubuhFilter', _frekuensi_nafas = '$frekuensinafasFilter', _riwayat_penyakit = '$riwayatFilter', _detail_riwayat = '$detailriwayatFilter', _konsumsi_obat = '$konsumsiobatFilter', _tujuan_obat = '$tujuanobatFilter', _status_keluhan = '$statuskeluhanFilter', _keluhan = '$keluhanFilter', _tingkat_kesadaran = '$tingkatkesadaranFilter', _pemeriksaan_mata = '$pemeriksaanmataFilter', _pemeriksaan_keseimbangan = '$keseimbanganFilter', _pengaruh_alkohol = '$pengaruhalkoholFilter', _keterangan = '$keteranganFilter', _catatan = '$catatanFilter', _medic = '$medicFilter' WHERE _id_pekerja = '$idFilter' AND _tgl_dcu = '$tglFilter'");
 		}
 
 		//Simpan Daftar Visitor
@@ -212,6 +214,54 @@
 			$tglExpMCUFilter = mysqli_real_escape_string($this->koneksi, $tglExpMCU);
 			
 			mysqli_query($this->koneksi,"UPDATE _tb_mcu SET _tgl_mcu = '$tglMCUFilter', _tgl_kadaluarsa_mcu = '$tglExpMCUFilter' WHERE _id_pekerja = '$idFilter'");
+		}
+
+		//Simpan Data Kotak P3K
+		function simpanKotakP3K($id, $lokasi, $nomor, $tipe){
+			$idFilter = mysqli_real_escape_string($this->koneksi, $id);
+			$lokasiFilter = mysqli_real_escape_string($this->koneksi, $lokasi);
+			$nomorFilter = mysqli_real_escape_string($this->koneksi, $nomor);
+			$tipeFilter = mysqli_real_escape_string($this->koneksi, $tipe);
+
+			mysqli_query($this->koneksi,"INSERT INTO _tb_kotak_p3k VALUES ('$idFilter','$lokasiFilter','$nomorFilter','$tipeFilter')");
+		}
+
+		//Simpan Data Kotak P3K
+		function updateKotakP3K($id, $lokasi, $nomor, $tipe){
+			$idFilter = mysqli_real_escape_string($this->koneksi, $id);
+			$lokasiFilter = mysqli_real_escape_string($this->koneksi, $lokasi);
+			$nomorFilter = mysqli_real_escape_string($this->koneksi, $nomor);
+			$tipeFilter = mysqli_real_escape_string($this->koneksi, $tipe);
+
+			mysqli_query($this->koneksi,"UPDATE _tb_kotak_p3k SET _lokasi_kotak = '$lokasiFilter', _no_kotak = '$nomorFilter', _tipe_kotak = '$tipeFilter' WHERE _id_kotak = '$idFilter'");
+		}
+
+		//Simpan Isi Kotak P3K
+		function simpanIsiKotakP3K($id, $nama, $expired, $status, $jumlah, $pemeriksaan, $pemeriksa, $ket){
+			$idFilter = mysqli_real_escape_string($this->koneksi, $id);
+			$namaFilter = mysqli_real_escape_string($this->koneksi, $nama);
+			$expiredFilter = mysqli_real_escape_string($this->koneksi, $expired);
+			$statusFilter = mysqli_real_escape_string($this->koneksi, $status);
+			$jumlahFilter = mysqli_real_escape_string($this->koneksi, $jumlah);
+			$pemeriksaanFilter = mysqli_real_escape_string($this->koneksi, $pemeriksaan);
+			$pemeriksaFilter = mysqli_real_escape_string($this->koneksi, $pemeriksa);
+			$ketFilter = mysqli_real_escape_string($this->koneksi, $ket);
+
+			mysqli_query($this->koneksi,"INSERT INTO _tb_isi_kotak_p3k (_id_kotak, _nama_isi_kotak, _expired, _status_tersedia, _jumlah, _pemeriksaan_terakhir, _pemeriksa, _keterangan) VALUES ('$idFilter','$namaFilter','$expiredFilter','$statusFilter','$jumlahFilter','$pemeriksaanFilter','$pemeriksaFilter','$ketFilter')");
+		}
+
+		//Simpan Update Isi Kotak P3K
+		function updateIsiKotakP3K($id, $nama, $expired, $status, $jumlah, $pemeriksaan, $pemeriksa, $ket){
+			$idFilter = mysqli_real_escape_string($this->koneksi, $id);
+			$namaFilter = mysqli_real_escape_string($this->koneksi, $nama);
+			$expiredFilter = mysqli_real_escape_string($this->koneksi, $expired);
+			$statusFilter = mysqli_real_escape_string($this->koneksi, $status);
+			$jumlahFilter = mysqli_real_escape_string($this->koneksi, $jumlah);
+			$pemeriksaanFilter = mysqli_real_escape_string($this->koneksi, $pemeriksaan);
+			$pemeriksaFilter = mysqli_real_escape_string($this->koneksi, $pemeriksa);
+			$ketFilter = mysqli_real_escape_string($this->koneksi, $ket);
+
+			mysqli_query($this->koneksi,"UPDATE _tb_isi_kotak_p3k SET _nama_isi_kotak = '$namaFilter', _expired = '$expiredFilter', _status_tersedia = '$statusFilter', _jumlah = '$jumlahFilter', _pemeriksaan_terakhir = '$pemeriksaanFilter', _pemeriksa = '$pemeriksaFilter', _keterangan = '$ketFilter' WHERE _id_isi_kotak = '$idFilter'");
 		}
 
 
