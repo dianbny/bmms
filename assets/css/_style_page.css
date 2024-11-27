@@ -111,7 +111,7 @@ a{
     margin-bottom: 15px;
 }
 .panel .dashboard{
-    width: 100%;
+    flex: 1;
     height: 140px;
     padding: 10px;
     border-radius: 5px;
@@ -209,7 +209,7 @@ a{
     margin-bottom: 20px;
 }
 .panel-bottom .dashboard-bottom{
-    width: 100%;
+    flex: 1;
     height: 350px;
     border: 1px solid #e4e4e4;
     border-radius: 5px;
@@ -320,7 +320,7 @@ a{
     margin-bottom: 11px;
     color: white;
     display: block;
-    transition: 0.5s;
+    transition: 0.3s;
     -webkit-tap-highlight-color: transparent;
 }
 
@@ -331,21 +331,27 @@ a{
 }
 
 .sidenav a:hover{
-    background-color: white;
-    color: black;
+    background-color: rgb(102, 102, 102);
+    border-left: 5px solid #FFFFFF;
 }
   
 .sidenav .closebtn {
+    width: 40px;
+    height: 30px;
     position: absolute;
-    top: 2px;
-    right: 2px;
+    top: 5px;
+    right: 5px;
     color: black;
     background-color: white;
-    border-radius: 3px;
+    border-radius: 5px;
+    border: 0px;
+    outline: none;
+    cursor: pointer;
 }
 .menu-first, .menu-second, .menu-third, .menu-fourth, .menu-fifth, .menu-sixth, .menu-seventh{
     width: 100%;
-    margin-top: 0px;
+    margin-top: -10px;
+    margin-bottom: -10px;
     display: none;
     background-color: rgb(11, 11, 11);
 }
@@ -596,8 +602,14 @@ a{
     .panel {
         flex-direction: column;
     }
+    .panel .dashboard{
+        width: 100%;
+    }
     .panel-bottom {
         flex-direction: column;
+    }
+    .panel-bottom .dashboard-bottom {
+        width: 100%;
     }
     .form-table input[type=text]{
         width: 150px;
