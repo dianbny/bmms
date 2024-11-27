@@ -1,6 +1,7 @@
 <?php
     if(!isset($_SESSION['status'])){ 
         header('location:logout');
+        exit();
     }
 
     if(isset($_GET['id'])){
@@ -23,6 +24,7 @@
                 <th>Pemeriksaan Terakhir</th>
                 <th>Pemeriksa</th>
                 <th>Keterangan</th>
+                <th style="text-align:center;">Detail</th>
                 <th colspan="2" style="text-align:center;">Aksi</th>
             </tr>
             <?php
@@ -44,6 +46,7 @@
                                     ?>
                             </td>
                             <td><?= $row['_keterangan']; ?></td>
+                            <td style="text-align:center;"><a href="detail-data-kotak-<?= $row['_id_kotak']; ?>" class="linkDetail"><i class="fa fa-info-circle" aria-hidden="true"></i></a></td>
                             <td style="text-align:center;"><a href="edit-data-isi-kotak-p3k-<?= $row['_id_isi_kotak']; ?>" class="linkDetail"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
                             <td style="text-align:center;"><a href="javascript:void(0)" data-id="<?= $row['_id_isi_kotak']; ?>" class="linkError konfirmDeleteIsiKotakP3K"><i class="fa fa-times-circle" aria-hidden="true"></i></a></td>
                         </tr>
