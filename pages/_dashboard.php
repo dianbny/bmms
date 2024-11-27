@@ -62,7 +62,7 @@
 
     <!-- Sidebar -->
     <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><i class="fa fa-times" aria-hidden="true"></i></a>
+        <button class="closebtn" onclick="closeNav()"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></button>
         
         <a href="dashboard"><i class="fa fa-tachometer" aria-hidden="true"></i>&nbsp; Dashboard</a>
         <a href="javascript:void(0)" id="first"><i class="fa fa-users" aria-hidden="true"></i>&nbsp; Pekerja</a>
@@ -431,7 +431,7 @@
                     <i class="fa fa-users" aria-hidden="true"></i>
                 </div>
                 <div class="title">
-                    <h3>Pekerja/TKJP/MK</h3>
+                    <h4>Pekerja/TKJP/MK</h4>
                     <span><?= $getData->cekJumlahPekerja(); ?></span><br>
                     Total
                 </div>
@@ -442,7 +442,7 @@
                     <i class="fa fa-stethoscope" aria-hidden="true"></i>
                 </div>
                 <div class="title">
-                    <h3>Daily Checkup</h3>
+                    <h4>Daily Checkup</h4>
                     <span><?= $getData->cekDCU(date('d'), date('m'), date('Y')); ?></span><br>
                     Total
                 </div>
@@ -453,7 +453,7 @@
                     <i class="fa fa-user-times" aria-hidden="true"></i>
                 </div>
                 <div class="title">
-                    <h3>No Checkup</h3>
+                    <h4>No Checkup</h4>
                     <span><?= $getData->cekNoDCU(date('d'), date('m'), date('Y')); ?></span><br>
                     Total
                 </div>
@@ -464,7 +464,7 @@
                     <i class="fa fa-check-square" aria-hidden="true"></i>
                 </div>
                 <div class="title">
-                    <h3>Fit to Work</h3>
+                    <h4>Fit to Work</h4>
                     <span><?= $getData->cekKeteranganDCU(date('d'), date('m'), date('Y'), "FIT"); ?></span><br>
                     Total <br>
                     
@@ -476,7 +476,7 @@
                     <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
                 </div>
                 <div class="title">
-                    <h3>Unfit to Work</h3>
+                    <h4>Unfit to Work</h4>
                     <span><?= $getData->cekKeteranganDCU(date('d'), date('m'), date('Y'), "UNFIT"); ?></span><br>
                     Total <br>
                 </div>
