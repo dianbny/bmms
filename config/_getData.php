@@ -1051,6 +1051,16 @@
 			return $getDataKotak;
 		}
 
+		//Get Jumlah Data Isi Kotak
+		function getJumDataIsiKotak($id){
+			$idFilter = mysqli_real_escape_string($this->koneksi, $id);
+			
+			$dataKotak = mysqli_query($this->koneksi,"SELECT SUM(_jumlah) AS jumlah FROM _tb_isi_kotak_p3k WHERE _id_kotak = '$idFilter'");
+			$getDataKotak = mysqli_fetch_assoc($dataKotak);
+			
+			return $getDataKotak;
+		}
+
     }
 
 ?>
