@@ -1,6 +1,7 @@
 <?php
     if(!isset($_SESSION['status'])){ 
         header('location:logout');
+        exit();
     }
 
     if(isset($_SESSION['page'])){
